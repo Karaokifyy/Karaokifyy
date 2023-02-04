@@ -1,6 +1,5 @@
 # Sprint 1
 
----
 ## User Stories
 ### Primary Feature
 
@@ -31,11 +30,7 @@
 - Colors/animations that match high or low pitch and/or mood of the song, bouncing ball, words scrolling across the
   screen, etc.
 
----
-
 ## Issues
-
--
 
 ### Issues Completed
 
