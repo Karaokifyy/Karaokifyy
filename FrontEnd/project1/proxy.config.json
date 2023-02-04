@@ -1,0 +1,12 @@
+
+{
+"/hello-world/*":{
+    "target": "http://localhost:5000",
+    "secure": "false",
+    "loglevel": "debug",
+    "changeOrigin": "false"
+
+
+
+}
+}
