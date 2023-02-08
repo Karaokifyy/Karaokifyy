@@ -48,6 +48,12 @@
     margin-bottom: 30px;
     font-size: 36px;
   }
+
+  h3 {
+    color: #fff;
+    margin-bottom: 30px;
+    font-size: 18px;
+  }
   
   form {
     background-color: #fff;
@@ -111,4 +117,8 @@
     cursor: pointer;
   }
   
-  
+  .mat-icon{
+    height:48px !important;
+    width:48px !important;
+    font-size:48px !important;
+}

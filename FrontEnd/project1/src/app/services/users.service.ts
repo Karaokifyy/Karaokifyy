@@ -10,7 +10,16 @@ export class UsersService {
   constructor(private http:HttpClient) { }
 
   giveUserDetails(){
-    return {id:'test', password:'test1'}
-    //<!-- return this.http.get-->
+
+    //return {id:'test', password:'test1'}
+    return this.http.get("https://jsonplaceholder.typicode.com/users");
+
+
+    //return this.http.post(("https://localhost:8080/users",myinputjsonvalue);
+
+
+  }
+  UserData(data:any){
+    console.warn(data);
   }
 }

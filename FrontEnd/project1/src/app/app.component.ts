@@ -9,14 +9,21 @@ import { UsersService } from './services/users.service';
 })
 export class AppComponent implements OnInit {
   title = 'project1';
+  username='';
+  password='';
+  
   users:any;
   constructor(private us:UsersService) {
 
    }
 
    ngOnInit(): void {
-     this.users=this.us.giveUserDetails()
-     //
+     //this.users=this.us.giveUserDetails()
+     
+   }
+
+   UserLogIn(){
+    console.log("Welcome "+(this.username));
    }
 
 
