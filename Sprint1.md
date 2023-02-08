@@ -31,13 +31,26 @@
   screen, etc.
 
 ## Issues
+- General:
+  - Sign up our web app with spotify 
+  - Communicate between front-end and back-end
+- Front-end:
+  - Setup an initial Angular project
+  - Have a HTTP service with a mock backend(jsonplace holder)
+  - Create basic skeleton for front-page (search bar, "sign up with spotify button")
+- Back-end:
+  - Get a back-end GO Server up and running
+  - Connect to spotify API using access token
+  - Retrieve public track info
+  - Set up foundation to accesss private user songs and playlist info (i.e. Authorization Code Flow for OAuth 2)
+  - Figure a way to serve front-end (angular, typescript, etc) pages through our GO server
 
 ### Issues Completed
-
+  - Get a back-end GO Server up and running
+  - Connect to spotify API using access token
+  - Retrieve public track info
+  - Create basic skeleton for front-page (search bar, "sign up with spotify button")
 ### Issues In Progress
-
-**Front-end:**
-
-I was unable to create a HTTP service to the server in time of sprint 1. I could get a service running to a json placeholder as a moch backend but I still need to het it running with the actual go code. I believe I was unable to complete this task in time due to the face that the original setup/installations as well as creating the login screen to most of the time. For the next sprint I will plan better to get more productive in terms of a proper HTTP service from clien to server.
-
-**Back-end:**
+The issues that weren't completed were because most of our efforts were spent acquiring inital knowledge and other aspects of the learning curve
+- Communication between front-end and back-end:
+  - Indecision on which method to pursue 
