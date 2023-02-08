@@ -79,12 +79,22 @@
     cursor: pointer;
     margin-top: 20px;
   }
+
+  button[type="reset"] {
+    background-color: #fff;
+    color: rgb(0, 0, 0);
+    font-size: 14px;
+    letter-spacing: normal;
+    cursor: pointer;
+
+  }
   
   p {
     margin-top: 20px;
     font-size: 14px;
     color: #999;
   }
+
   
   a {
     color: #1DB954;
