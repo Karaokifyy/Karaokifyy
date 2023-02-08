@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"os"
-	"utils"
 
 	"github.com/gorilla/mux"
 )
@@ -19,25 +17,25 @@ func main() {
 
 	srv := &http.Server{
 		Handler: r,
-		Addr:    ":" + os.Getenv("PORT"),
+		Addr:    ":http",
 	}
 
 	log.Fatal(srv.ListenAndServe())
 }
 
 func helloWorld(w http.ResponseWriter, r *http.Request) {
+	// fmt.Fprintf(w, "Hello")
 	var data = struct {
 		Title string `json:"title"`
 	}{
-		Title: "Golang + Angular Starter Kit",
+		Title: "See if this works THIS IS A TEST",
 	}
 
-	jsonBytes, err := utils.StructToJSON(data)
+	jsonBytes, err := StructToJSON(data)
 	if err != nil {
 		fmt.Print(err)
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(jsonBytes)
-	return
 }
