@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
    }
 
    UserLogIn(){
-    console.log("Welcome "+(this.username));
+    console.log("Welcome " + (this.username));
    }
 
 
