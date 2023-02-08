@@ -55,9 +55,37 @@ func Playlist(id string) {
 	log.Println("Playlist description:", playlist.Description)
 }
 
-// Connect to Spotify API and print artist info
-// TODO: Consolidate redundant code (generate client once)
-func Artist(artistName string) {
+// // Connect to Spotify API and print artist info
+// // TODO: Consolidate redundant code (generate client once)
+// func Artist(artistName string) {
+// 	getEnvVars()
+// 	cid := os.Getenv("ClientID")
+// 	sec := os.Getenv("ClientSecret")
+
+// 	authConfig := &clientcredentials.Config{
+// 		ClientID:     cid,
+// 		ClientSecret: sec,
+// 		TokenURL:     spotify.TokenURL,
+// 	}
+
+// 	accessToken, err := authConfig.Token(context.Background())
+// 	if err != nil {
+// 		log.Fatalf("Error retrieving access token: %v", err)
+// 	}
+
+// 	client := spotify.Authenticator{}.NewClient(accessToken)
+
+// 	artist, err := client.Search(artistName, spotify.SearchTypeArtist)
+// 	if err != nil {
+// 		log.Fatalf("Error retrieving artist data: %v", err)
+// 	}
+
+// 	log.Println(artist)
+// }
+
+// Connect to Spotify api and returns track search results via:
+// spotify.SearchTypeTrack.Tracks
+func SearchByTrack(trackName string) *spotify.FullTrackPage {
 	getEnvVars()
 	cid := os.Getenv("ClientID")
 	sec := os.Getenv("ClientSecret")
@@ -75,10 +103,10 @@ func Artist(artistName string) {
 
 	client := spotify.Authenticator{}.NewClient(accessToken)
 
-	playlist, err := client.Search(artistName, spotify.SearchTypeArtist)
+	result, err := client.Search(trackName, spotify.SearchTypeTrack)
 	if err != nil {
-		log.Fatalf("Error retrieving playlist data: %v", err)
+		log.Fatalf("Error retrieving track data: %v", err)
 	}
 
-	log.Println(playlist)
+	return result.Tracks
 }

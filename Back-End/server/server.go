@@ -5,6 +5,8 @@ import (
 	"net/http"
 	"os"
 
+	"Karaokifyy/Back-End/spotify_api"
+
 	"github.com/gin-gonic/gin"
 )
 
@@ -62,8 +64,24 @@ func postAlbums(c *gin.Context) {
 	c.IndentedJSON(http.StatusCreated, newAlbum)
 }
 
+// getTrackByName searches for a track by name using spotify_api.SearchTrackByName method and
+// serves resulting json data.
+func getTrackByName(c *gin.Context) {
+	trackName := c.Param("trackName")
+	trackList := spotify_api.SearchByTrack(trackName)
+
+	// Loop over the list of tracks, looking for a track
+	// name that matches the parameter given.
+
+	for _, a := range trackList.Tracks {
+		c.IndentedJSON(http.StatusOK, a)
+	}
+	c.IndentedJSON(http.StatusNotFound, gin.H{"message": "track not found"})
+}
+
 func RunServer() {
 	router := gin.Default()
+	router.GET("/track/:trackName", getTrackByName)
 	router.GET("/albums", getAlbums)
 	router.GET("/albums/:id", getAlbumByID)
 	router.POST("/albums", postAlbums)
