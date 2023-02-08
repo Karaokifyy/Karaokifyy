@@ -35,4 +35,9 @@
 ### Issues Completed
 
 ### Issues In Progress
-FrontEnd: I was unable to create a HTTP service to the server in time of sprint 1. I could get a service running to a json placeholder as a moch backend but I still need to het it running with the actual go code. I believe I was unable to complete this task in time due to the face that the original setup/installations as well as creating the login screen to most of the time. For the next sprint I will plan better to get more productive in terms of a proper HTTP service from clien to server.
+
+#### Front-end: 
+
+I was unable to create a HTTP service to the server in time of sprint 1. I could get a service running to a json placeholder as a moch backend but I still need to het it running with the actual go code. I believe I was unable to complete this task in time due to the face that the original setup/installations as well as creating the login screen to most of the time. For the next sprint I will plan better to get more productive in terms of a proper HTTP service from clien to server.
+
+#### Back-end:
