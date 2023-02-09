@@ -1,5 +1,8 @@
 # Sprint 1
 
+## Youtube Linkw
+- Front-End: https://youtu.be/eqYOXofHCrE
+- Back-End: https://youtu.be/Ivnb2XtR_oQ
 ## User Stories
 ### Primary Feature
 
