@@ -1,4 +1,4 @@
-module Karaokifyy/Back-End
+module Karaokifyy/backend
 
 go 1.20
 
