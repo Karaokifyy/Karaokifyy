@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   password='';
   
   users:any;
+  router: any;
   constructor(private us:UsersService) {
 
    }
@@ -24,6 +25,9 @@ export class AppComponent implements OnInit {
 
    UserLogIn(){
     console.log("Welcome " + (this.username));
+    //this.router.navigate(['/dashboard']);
+    const authUrl = 'https://accounts.spotify.com/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code';
+    window.location.href = authUrl;
    }
 
 
