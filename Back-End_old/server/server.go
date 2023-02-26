@@ -10,6 +10,12 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+//Object to represent a spotify user and their unique/temp session
+type SpotifyUserSession struct
+{
+	inital_oauth_code string
+	inital_oauth_state string
+}
 // Create Albums struct to represent list of albums
 type Albums struct {
 	Albums []Album `json:"albums"`
