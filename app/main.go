@@ -21,7 +21,23 @@ func main() {
 
 	//redirects root requests to client homepage
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		http.Redirect(w, r, "/client/project1/src/app/app.component.html", http.StatusFound)
+		http.Redirect(w, r, "/client/Karaokify/dist/karaokify/index.html", http.StatusFound)
+	})
+
+	r.HandleFunc("/main.4835f67e1d016940.js", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/client/Karaokify/dist/karaokify/main.4835f67e1d016940.js", http.StatusFound)
+	})
+
+	r.HandleFunc("/polyfills.bf8970584519db6b.js", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/client/Karaokify/dist/karaokify/polyfills.bf8970584519db6b.js", http.StatusFound)
+	})
+
+	r.HandleFunc("/runtime.8a584406e953a5e1.js", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/client/Karaokify/dist/karaokify/runtime.8a584406e953a5e1.js", http.StatusFound)
+	})
+
+	r.HandleFunc("/styles.f37111f28d0f589f.css", func(w http.ResponseWriter, r *http.Request) {
+		http.Redirect(w, r, "/client/Karaokify/dist/karaokify/styles.f37111f28d0f589f.css", http.StatusFound)
 	})
 
 	r.HandleFunc("/track/{trackName}", spotify_api.GetTrackByName).Methods("GET")
