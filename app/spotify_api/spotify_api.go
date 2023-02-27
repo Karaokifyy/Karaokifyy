@@ -2,10 +2,12 @@ package spotify_api
 
 import (
 	"context"
+	"encoding/json"
+	"errors"
 	"log"
 	"net/http"
 	"os"
-	"encoding/json"
+
 	"github.com/gorilla/mux"
 
 	"github.com/joho/godotenv"
@@ -41,13 +43,13 @@ var _ = json.Unmarshal(byteValue, &albums)
 
 
 // getAlbums responds with the list of all albums as JSON
-func getAlbums(w http.ResponseWriter, r *http.Request) {
+func GetAlbums(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(albums)
 }
 
 // getAlbumByID locates the album whose ID value matches the id
 // Parameter sent by the client, then returns that album as a response
-func getAlbumByID(w http.ResponseWriter, r *http.Request) {
+func GetAlbumByID(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	id := vars["id"]
 
@@ -65,7 +67,7 @@ func getAlbumByID(w http.ResponseWriter, r *http.Request) {
 }
 
 // postAlbums adds an album from JSON received in the request body
-func postAlbums(w http.ResponseWriter, r *http.Request) {
+func PostAlbums(w http.ResponseWriter, r *http.Request) {
 	var newAlbum Album
 
 	// Call BindJSON to bind the received JSON to
@@ -81,7 +83,7 @@ func postAlbums(w http.ResponseWriter, r *http.Request) {
 
 // getTrackByName searches for a track by name using spotify_api.SearchTrackByName method and
 // serves resulting json data.
-func getTrackByName(w http.ResponseWriter, r *http.Request) {
+func GetTrackByName(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	trackName := vars["trackName"]
 	trackList := SearchByTrack(trackName)
@@ -187,4 +189,26 @@ func SearchByTrack(trackName string) *spotify.FullTrackPage {
 	}
 
 	return result.Tracks
+}
+
+//Object to represent a spotify user and their unique/temp session
+type SpotifyUserSession struct
+{
+	initial_oauth_code string `json:"o_code"`
+	initial_oauth_state string `json:"o_state"`
+	
+	
+	access_token string `json:"access_token"`
+	token_type string `json:"token_type"`
+	scope string `json:"scope"`
+	expires_in int `json:"expires_in"`
+	refresh_token string `json:"refresh_token"`
+}
+
+func RequestAccessToken(user *SpotifyUserSession) error {
+	if user.initial_oauth_code == "" {
+		return errors.New("Spotify user OAUTH code was emppty")
+	}
+
+	return nil
 }
