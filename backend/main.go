@@ -7,6 +7,8 @@ import (
 )
 
 func main() {
+	// search.SearchBySong("Hyperballad")
+
 	router := gin.Default()
 	search.Init(router)
 	router.Run("localhost:8080")
