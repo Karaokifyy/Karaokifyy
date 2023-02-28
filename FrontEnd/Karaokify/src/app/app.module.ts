@@ -10,6 +10,7 @@ import { UsersService } from './services/user.service';
 import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { SearchScreenItIsComponent } from './search-screen-it-is/search-screen-it-is.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
+import { ItunesService } from './services/itunes.service';
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -31,7 +32,7 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot([])
   ],
-  providers: [UsersService],
-  bootstrap: [AppComponent]
+  providers: [UsersService, ItunesService],
+  bootstrap: [AppComponent, SearchScreenItIsComponent, HomeScreenComponent]
 })
 export class AppModule { }

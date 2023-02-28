@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-//import { UsersService } from './services/users.service';
 import { UsersService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home-screen',
@@ -10,7 +10,7 @@ import { UsersService } from '../services/user.service';
 export class HomeScreenComponent implements OnInit{
   username='';
   password='';
-  constructor(private us:UsersService) {
+  constructor(private us:UsersService, private router: Router) {
 
   }
 
@@ -21,6 +21,9 @@ export class HomeScreenComponent implements OnInit{
 
   UserLogIn(){
    console.log("Welcome " + (this.username));
+   this.router.navigateByUrl('/screen-search');
+   //const authUrl = 'https://accounts.spotify.com/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=&response_type=code';
+   //window.location.href = authUrl;
   }
 
 
