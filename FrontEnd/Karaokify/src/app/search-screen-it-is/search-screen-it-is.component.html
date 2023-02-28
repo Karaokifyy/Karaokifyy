@@ -1,14 +1,13 @@
-<p>search-screen works!</p>
-
+<header>
+    <h1>Karaokify Search</h1>
+  </header>
 <form>
     <div class="form-group">
-        <div class="search-container">
-            <input type="text" name="searchStr" (keyup)="searchMusic()" [(ngModel)]="searchStr" placeholder="Search Music">
-            <button>Search</button>
-        </div>
-        
-
+      <label for="searchBar">Search Music</label>
+      <div class="search-container">
+        <input type="text" id="searchBar" name="searchStr" (keyup)="searchMusic()" [(ngModel)]="searchStr" placeholder="Search for artists, songs, or albums">
+        <button>Search</button>
+      </div>
     </div>
-
-
-</form>
+  </form>
+  
