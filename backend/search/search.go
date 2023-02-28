@@ -12,6 +12,24 @@ import (
 	"golang.org/x/oauth2/clientcredentials"
 )
 
+// A Song object (for front-end) with filtered JSON exporting
+type Song struct {
+	// songID
+	SongID string `json:"SongID"`
+	// songName
+	SongName string `json:"SongName"`
+	// artistName
+	ArtistName string `json:"ArtistName"`
+	// songLength
+	SongLength float32 `json:"SongLength"`
+	// albumImg
+	AlbumImg string `json:"AlbumImg"`
+}
+
+// TODO: type Artist struct
+// TODO: type Album struct
+// TODO: type Playlist struct
+
 // Load environment vars from file
 func getEnvVars() {
 	err := godotenv.Load("./config/cred.env")
@@ -20,7 +38,8 @@ func getEnvVars() {
 	}
 }
 
-func searchBySong(songName string) *spotify.FullTrackPage {
+// Authenticates and loads Spotify client
+func getSpotifyClient() spotify.Client {
 	getEnvVars()
 	cid := os.Getenv("ClientID")
 	sec := os.Getenv("ClientSecret")
@@ -36,27 +55,45 @@ func searchBySong(songName string) *spotify.FullTrackPage {
 		log.Fatalf("Error retrieving access token: %v", err)
 	}
 
-	client := spotify.Authenticator{}.NewClient(accessToken)
+	return spotify.Authenticator{}.NewClient(accessToken)
+}
+
+// Takes string and performs a Spotify song search
+// Returns a slice of Song structs
+func SearchBySong(songName string) []Song {
+	client := getSpotifyClient()
 
 	result, err := client.Search(songName, spotify.SearchTypeTrack)
 	if err != nil {
 		log.Fatalf("Error retrieving track data: %v", err)
 	}
 
-	return result.Tracks
+	var songList []Song
+	length := len(result.Tracks.Tracks)
+
+	for i := 0; i < length; i++ {
+		track := result.Tracks.Tracks[i]
+		songID := track.SimpleTrack.ID.String()
+		songName := track.SimpleTrack.Name
+		artistName := track.SimpleTrack.Artists[0].Name
+		songLength := float32(track.SimpleTrack.Duration) / 1000
+		albumImg := track.Album.Images[1].URL
+		songList = append(songList, Song{songID, songName, artistName, songLength, albumImg})
+	}
+
+	return songList
 }
 
 func searchSong(song *gin.Context) {
 	songName := song.Param("songName")
-	songList := searchBySong(songName)
+	songList := SearchBySong(songName)
 
 	// Loop over the list of tracks, looking for a track
 	// name that matches the parameter given.
 
-	for _, a := range songList.Tracks {
-		song.IndentedJSON(http.StatusOK, a)
-	}
-	song.IndentedJSON(http.StatusNotFound, gin.H{"Message": "Song not found"})
+	song.IndentedJSON(http.StatusOK, songList)
+
+	// song.IndentedJSON(http.StatusNotFound, gin.H{"Message": "Song not found"})
 }
 
 func Init(router *gin.Engine) {
