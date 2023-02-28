@@ -1,7 +1,13 @@
 import { Component } from '@angular/core';
 import { SpotifyService } from '../services/spotify.service';
 import { ItunesService } from '../services/itunes.service';
-
+import { Observable } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import {
+  HttpEvent, HttpInterceptor, HttpHandler, HttpRequest
+} from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { NoopInterceptorService } from '../services/intercept.service';
 
 @Component({
   selector: 'app-search-screen-it-is',
@@ -13,28 +19,16 @@ export class SearchScreenItIsComponent {
 
   searchStr:String="";
   songs:any;
+  constructor(private http: HttpClient) {}
+  httpData = [];
 
-  constructor(private _s:ItunesService){
-
-  }
-
-  searchMusic(){
-    console.log(this.searchStr);
-    //console.log(this._s.search(this.searchStr));
-    this._s.search(this.searchStr)
-    // .subscribe((res) => {
-    //   this.songs = res.json().results;
-    // });
-
-
-
-    
-    // .subscribe((data)=>{
-    //   this.artists=data
-    // })
-      //res => {
-      //console.log(res);
-    //})
-  }
-
+  httpResult = ($event: any) => {
+    const url = `https://itunes.apple.com/search?term=${$event}&limit=11`;
+    console.log(url);
+    this.http.get<any>(url).subscribe(data => {
+      this.httpData = data.results;
+      console.log(data.results);
+    });
+  };
 }
+

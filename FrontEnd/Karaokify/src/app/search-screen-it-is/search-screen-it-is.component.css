@@ -9,6 +9,9 @@ header {
   font-weight: bold;
   text-transform: uppercase;
 }
+td img{
+  width: 50px;
+}
 
 h1 {
   margin: 0;

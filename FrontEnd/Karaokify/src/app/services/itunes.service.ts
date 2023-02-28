@@ -1,17 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpClientJsonpModule, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+
 
 @Injectable()
 export class ItunesService {
 
-  constructor(private _http: HttpClient) { }
+    apiRoot: string = "https://itunes.apple.com/search";
+    results: [];
+  constructor(private jsonp: HttpClient) {
+    this.results = [];
+   }
 
-  search(str:String) {
+  search(term:String){
 
-    return this._http.get(`https://itunes.apple.com/search?term=${String}&limit=${"10"}`);
-    //this._http.request('GET', )
-    //httpClient.request('GET', this.heroesUrl + '?' + 'name=term', {responseType:'json'});
-
+    this.results = [];
+      let apiURL = `${this.apiRoot}?term=${term}&media=music&limit=10`;
+      
+      console.log(apiURL);
+      this.jsonp.get<any>(apiURL).subscribe(data => {
+        this.results=data.results;
+        console.log(data.results)
+      })
   }
 }

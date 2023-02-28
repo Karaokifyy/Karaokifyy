@@ -11,6 +11,11 @@ import { AppRoutingModule, routingComponents } from './app-routing.module';
 import { SearchScreenItIsComponent } from './search-screen-it-is/search-screen-it-is.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { ItunesService } from './services/itunes.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import {NoopInterceptorService} from './services/intercept.service';
+export const HTTPINTProviders = [
+  { provide: 'HTTP_INTERCEPTORS', useClass: 'NoopInterceptor', multi: true },
+];
 
 const appRoutes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -32,7 +37,7 @@ const appRoutes: Routes = [
     FormsModule,
     RouterModule.forRoot([])
   ],
-  providers: [UsersService, ItunesService],
+  providers: [UsersService, ItunesService, HTTPINTProviders],
   bootstrap: [AppComponent, SearchScreenItIsComponent, HomeScreenComponent]
 })
 export class AppModule { }

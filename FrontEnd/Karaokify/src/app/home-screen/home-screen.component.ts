@@ -21,9 +21,10 @@ export class HomeScreenComponent implements OnInit{
 
   UserLogIn(){
    console.log("Welcome " + (this.username));
-   this.router.navigateByUrl('/screen-search');
-   //const authUrl = 'https://accounts.spotify.com/authorize?client_id=YOUR_CLIENT_ID&redirect_uri=&response_type=code';
-   //window.location.href = authUrl;
+   //this.router.navigateByUrl('/screen-search');
+   //http://localhost:4200/screen-search
+   const authUrl = 'https://accounts.spotify.com/authorize?client_id=8b82fa6e6c4b4d2fb3ce122fe2e3d6ad&redirect_uri=http://localhost:4200/screen-search&response_type=code';
+   window.location.href = authUrl;
   }
 
 
