@@ -12,22 +12,30 @@ import (
 	"golang.org/x/oauth2/clientcredentials"
 )
 
-// A Song object (for front-end) with filtered JSON exporting
+// A Song object (for front-end) with filtered JSON
 type Song struct {
-	// songID
-	SongID string `json:"SongID"`
-	// songName
-	SongName string `json:"SongName"`
-	// artistName
-	ArtistName string `json:"ArtistName"`
-	// songLength
+	SongID     string  `json:"SongID"`
+	SongName   string  `json:"SongName"`
+	ArtistName string  `json:"ArtistName"`
 	SongLength float32 `json:"SongLength"`
-	// albumImg
-	AlbumImg string `json:"AlbumImg"`
+	AlbumImg   string  `json:"AlbumImg"`
 }
 
-// TODO: type Artist struct
-// TODO: type Album struct
+// An Artist object (for front-end) with filtered JSON
+type Artist struct {
+	ArtistID   string `json:"ArtistID"`
+	ArtistName string `json:"ArtistName"`
+	ArtistImg  string `json:"ArtistImg"`
+}
+
+// An Album object (for front-end) with filtered JSON
+type Album struct {
+	AlbumID    string `json:"AlbumID"`
+	AlbumName  string `json:"AlbumName"`
+	ArtistName string `json:"ArtistName"`
+	AlbumImg   string `json:"AlbumImg"`
+}
+
 // TODO: type Playlist struct
 
 // Load environment vars from file
@@ -38,7 +46,7 @@ func getEnvVars() {
 	}
 }
 
-// Authenticates and loads Spotify client
+// Authenticates token and returns a Spotify client
 func getSpotifyClient() spotify.Client {
 	getEnvVars()
 	cid := os.Getenv("ClientID")
@@ -63,6 +71,7 @@ func getSpotifyClient() spotify.Client {
 func SearchBySong(songName string) []Song {
 	client := getSpotifyClient()
 
+	// Search for a song/track containing "songName"
 	result, err := client.Search(songName, spotify.SearchTypeTrack)
 	if err != nil {
 		log.Fatalf("Error retrieving track data: %v", err)
@@ -84,6 +93,30 @@ func SearchBySong(songName string) []Song {
 	return songList
 }
 
+func SearchByAlbum(albumName string) []Album {
+	client := getSpotifyClient()
+
+	// Search for an album containing "albumName"
+	result, err := client.Search(albumName, spotify.SearchTypeAlbum)
+	if err != nil {
+		log.Fatalf("Error retrieving album data: %v", err)
+	}
+
+	var albumList []Album
+	length := len(result.Albums.Albums)
+
+	for i := 0; i < length; i++ {
+		album := result.Albums.Albums[i]
+		albumID := album.ID.String()
+		albumName := album.Name
+		artistName := album.Artists[0].Name
+		albumImg := album.Images[1].URL
+		albumList = append(albumList, Album{albumID, albumName, artistName, albumImg})
+	}
+
+	return albumList
+}
+
 func searchSong(song *gin.Context) {
 	songName := song.Param("songName")
 	songList := SearchBySong(songName)
@@ -96,6 +129,14 @@ func searchSong(song *gin.Context) {
 	// song.IndentedJSON(http.StatusNotFound, gin.H{"Message": "Song not found"})
 }
 
+func searchAlbum(album *gin.Context) {
+	albumName := album.Param("albumName")
+	albumList := SearchByAlbum(albumName)
+
+	album.IndentedJSON(http.StatusOK, albumList)
+}
+
 func Init(router *gin.Engine) {
 	router.GET("/search/song/:songName", searchSong)
+	router.GET("/search/album/:albumName", searchAlbum)
 }
