@@ -199,7 +199,8 @@ type SpotifyUserSession struct
 type Playlist struct
 {
 	Name string `json:"name"`
-	Image []spotify.Image	`json:"image"`
+	Images []spotify.Image	`json:"images"`
+	URI spotify.URI `json:"uri"`
 }
 
 func RequestAccessToken(user *SpotifyUserSession) error {
@@ -243,7 +244,7 @@ func GetUserPlaylists(user *SpotifyUserSession) (output map[string]Playlist, err
 		return
 	}
 	for _, playlist := range playlists.Playlists{
-		output[playlist.Name] = Playlist{playlist.Name, playlist.Images}
+		output[playlist.Name] = Playlist{playlist.Name, playlist.Images, playlist.URI}
 	}
 
 	return
