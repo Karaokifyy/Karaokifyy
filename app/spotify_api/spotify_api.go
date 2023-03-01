@@ -90,7 +90,7 @@ func GetTrackByName(w http.ResponseWriter, r *http.Request) {
 
 
 // Connect to Spotify API and print playlist info
-func Playlist(id string) {
+func GetSpotifyPlaylist(id string) {
 
 	// Initialize and assign environment variables
 	cid := os.Getenv("ClientID")
@@ -196,6 +196,12 @@ type SpotifyUserSession struct
 	client spotify.Client
 }
 
+type Playlist struct
+{
+	Name string `json:"name"`
+	Image []spotify.Image	`json:"image"`
+}
+
 func RequestAccessToken(user *SpotifyUserSession) error {
 	if user.Initial_oauth_code == "" {
 		return errors.New("spotify user OAUTH code was emppty")
@@ -228,15 +234,16 @@ func RequestAccessToken(user *SpotifyUserSession) error {
 	return nil
 }
 
-func GetUserPlaylists(user *SpotifyUserSession) (p_strings []string, err error) {
+func GetUserPlaylists(user *SpotifyUserSession) (output map[string]Playlist, err error) {
 	playlists, err_pl := user.client.CurrentUsersPlaylists()
+	output = make(map[string]Playlist)
 
 	if err_pl != nil{
 		err = errors.New("couldn't get user's playlists")
 		return
 	}
 	for _, playlist := range playlists.Playlists{
-		p_strings = append(p_strings, playlist.Name)
+		output[playlist.Name] = Playlist{playlist.Name, playlist.Images}
 	}
 
 	return

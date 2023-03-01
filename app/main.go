@@ -65,10 +65,12 @@ func newSpotifySession(w http.ResponseWriter, r *http.Request){
 		log.Fatalf("Couldn't get user's playlist")
 	}
 	
-	for _, playlist := range playlists {
-		json.NewEncoder(log.Default().Writer()).Encode(playlist)
-		json.NewEncoder(w).Encode(playlist)
-	}
+	json.NewEncoder(log.Default().Writer()).Encode(playlists)
+	json.NewEncoder(w).Encode(playlists)
+	// for _, playlist := range playlists {
+	// 	json.NewEncoder(log.Default().Writer()).Encode(playlist)
+	// 	json.NewEncoder(w).Encode(playlist)
+	// }
 
 	spotify_users[r.RemoteAddr] = newUser
 }
