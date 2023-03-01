@@ -14,7 +14,7 @@ import { ItunesService } from './services/itunes.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {NoopInterceptorService} from './services/intercept.service';
 export const HTTPINTProviders = [
-  { provide: 'HTTP_INTERCEPTORS', useClass: 'NoopInterceptor', multi: true },
+  { provide: HTTP_INTERCEPTORS, useClass: NoopInterceptorService, multi: true },
 ];
 
 const appRoutes: Routes = [
