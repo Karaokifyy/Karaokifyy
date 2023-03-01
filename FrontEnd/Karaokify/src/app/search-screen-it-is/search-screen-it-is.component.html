@@ -1,1 +1,25 @@
-<p>search-screen-it-is works!</p>
+<header>
+    <h1>Karaokify Search</h1>
+  </header>
+<form>
+    <div class="form-group">
+      <label for="searchBar">Search Music</label>
+      <div class="search-container">
+        <input type="text" id="searchBar" name="search" autocomplete="off" placeholder="Search for Music" #search/>
+        <button mat-raised-button (click)="httpResult(search.value)">Search</button>
+      </div>
+    </div>
+    <table class="table table-striped table-bordered mt-4">
+        <thead>
+            <th>Track Name</th>
+            <th>Artist</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of httpData; let i = index">
+                <td>{{data['trackName']}}</td>
+                <td>{{data['artistName']}}</td>
+            </tr>
+        </tbody>
+    </table>
+  </form>
+  
