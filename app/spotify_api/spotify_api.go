@@ -10,18 +10,9 @@ import (
 
 	"github.com/gorilla/mux"
 
-	"github.com/joho/godotenv"
 	"github.com/zmb3/spotify"
 	"golang.org/x/oauth2/clientcredentials"
 )
-
-// Load environment vars from file
-func getEnvVars() {
-	err := godotenv.Load("./config/cred.env")
-	if err != nil {
-		log.Fatal("Error loading .env file")
-	}
-}
 
 // Create Albums struct to represent list of albums
 type Albums struct {
@@ -63,7 +54,7 @@ func GetAlbumByID(w http.ResponseWriter, r *http.Request) {
 	}
 	
 	json.NewEncoder(w).Encode(map[string]interface{}{"Message": "Album not found"})
-	http.Error(w,"", http.StatusNotFound)
+	//http.Error(w,"", http.StatusNotFound)
 }
 
 // postAlbums adds an album from JSON received in the request body
@@ -102,7 +93,6 @@ func GetTrackByName(w http.ResponseWriter, r *http.Request) {
 func Playlist(id string) {
 
 	// Initialize and assign environment variables
-	getEnvVars()
 	cid := os.Getenv("ClientID")
 	sec := os.Getenv("ClientSecret")
 
@@ -166,7 +156,6 @@ func Playlist(id string) {
 // Connect to Spotify api and returns track search results via:
 // spotify.SearchTypeTrack.Tracks
 func SearchByTrack(trackName string) *spotify.FullTrackPage {
-	getEnvVars()
 	cid := os.Getenv("ClientID")
 	sec := os.Getenv("ClientSecret")
 
@@ -194,21 +183,62 @@ func SearchByTrack(trackName string) *spotify.FullTrackPage {
 //Object to represent a spotify user and their unique/temp session
 type SpotifyUserSession struct
 {
-	initial_oauth_code string `json:"o_code"`
-	initial_oauth_state string `json:"o_state"`
+	Initial_oauth_code string `json:"o_code"`
+	Initial_oauth_state string `json:"o_state"`
+	Redirect_uri string `json:"redirect_uri"`
 	
-	
-	access_token string `json:"access_token"`
-	token_type string `json:"token_type"`
-	scope string `json:"scope"`
-	expires_in int `json:"expires_in"`
-	refresh_token string `json:"refresh_token"`
+	Access_token string `json:"access_token"`
+	Token_type string `json:"token_type"`
+	Scope string `json:"scope"`
+	Expires_in int `json:"expires_in"`
+	Refresh_token string `json:"refresh_token"`
+
+	client spotify.Client
 }
 
 func RequestAccessToken(user *SpotifyUserSession) error {
-	if user.initial_oauth_code == "" {
-		return errors.New("Spotify user OAUTH code was emppty")
+	if user.Initial_oauth_code == "" {
+		return errors.New("spotify user OAUTH code was emppty")
 	}
 
+	// Initialize and assign environment variables
+	cid := os.Getenv("ClientID")
+	sec := os.Getenv("ClientSecret")
+
+	// Authorize credentials
+	authConfig := &clientcredentials.Config{
+		ClientID:     cid,
+		ClientSecret: sec,
+		TokenURL:     spotify.TokenURL,
+		EndpointParams: map[string][]string{
+			"grant_type":{"authorization_code"},
+			"code":{user.Initial_oauth_code},
+			"redirect_uri":{user.Redirect_uri}},
+	}
+
+	accessToken, err := authConfig.Token(context.Background())
+	if err != nil {
+		log.Fatalf("Error retrieving access token: %v", err)
+	}
+
+	scope := accessToken.Extra("scope")
+	log.Printf("Type of Spotify Scope Extra: %T", scope)
+
+	user.client = spotify.NewAuthenticator(user.Redirect_uri).NewClient(accessToken)
 	return nil
+}
+
+func GetUserPlaylists(user *SpotifyUserSession) (p_strings []string, err error) {
+	playlists, err_pl := user.client.CurrentUsersPlaylists()
+
+	if err_pl != nil{
+		err = errors.New("couldn't get user's playlists")
+		return
+	}
+
+	for _, playlist := range playlists.Playlists{
+		p_strings = append(p_strings, playlist.Name)
+	}
+
+	return
 }
