@@ -30,7 +30,7 @@ export class SearchScreenItIsComponent implements OnInit{
     const url = `http://localhost:8080/newSpotifySession`;
     this.route.queryParamMap
     .subscribe(params => {
-      this.http.post(url, JSON.stringify({o_code:params.get("code")}))
+      this.http.post(url, JSON.stringify({o_code:params.get("code")})).subscribe()
       console.log(JSON.stringify({o_code:params.get("code")}))
       console.log(params.get("code"))})
       

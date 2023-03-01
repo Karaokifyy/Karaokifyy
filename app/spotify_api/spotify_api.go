@@ -85,7 +85,7 @@ func GetTrackByName(w http.ResponseWriter, r *http.Request) {
 	for _, a := range trackList.Tracks {
 		json.NewEncoder(w).Encode(a)
 	}
-	json.NewEncoder(w).Encode(map[string]interface{}{"Message": "Track not found"})
+	//json.NewEncoder(w).Encode(map[string]interface{}{"Message": "Track not found"})
 }
 
 
@@ -235,7 +235,6 @@ func GetUserPlaylists(user *SpotifyUserSession) (p_strings []string, err error) 
 		err = errors.New("couldn't get user's playlists")
 		return
 	}
-
 	for _, playlist := range playlists.Playlists{
 		p_strings = append(p_strings, playlist.Name)
 	}

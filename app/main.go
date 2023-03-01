@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+
 	//"path/filepath"
 	"encoding/json"
 
@@ -34,24 +35,30 @@ func main() {
 	r.HandleFunc("/albums", spotify_api.PostAlbums).Methods("POST")
 
 	r.HandleFunc("/newSpotifySession", newSpotifySession)
-	http.ListenAndServe(":80", r)
+	http.ListenAndServe(":8080", r)
 }
 
-var spotify_users map[string]spotify_api.SpotifyUserSession
+var spotify_users map[string]spotify_api.SpotifyUserSession = make(map[string]spotify_api.SpotifyUserSession)
 
 
 func newSpotifySession(w http.ResponseWriter, r *http.Request){
+	log.Printf("Called newSpotifySession\n")
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
+	//retrieving initial json paramaters and setting redirect0rui
 	var newUser spotify_api.SpotifyUserSession
 
 	if err := json.NewDecoder(r.Body).Decode(&newUser); err != nil {
 		return
 	}
+	newUser.Redirect_uri = "http://localhost:4200/screen-search"
 
 	//requesting access_token
+	log.Printf("requesting access_token\n")
 	if err := spotify_api.RequestAccessToken(&newUser); err != nil{
 		log.Fatalf("couldn't retrive access token")//convert to non-fatal or return
 	}
 
+	log.Printf("getting user playlist\n")
 	playlists, err := spotify_api.GetUserPlaylists(&newUser)
 
 	if err != nil {
@@ -59,6 +66,7 @@ func newSpotifySession(w http.ResponseWriter, r *http.Request){
 	}
 	
 	for _, playlist := range playlists {
+		json.NewEncoder(log.Default().Writer()).Encode(playlist)
 		json.NewEncoder(w).Encode(playlist)
 	}
 
