@@ -25,7 +25,6 @@ type Song struct {
 type Artist struct {
 	ArtistID   string `json:"ArtistID"`
 	ArtistName string `json:"ArtistName"`
-	ArtistImg  string `json:"ArtistImg"`
 }
 
 // An Album object (for front-end) with filtered JSON
@@ -36,7 +35,11 @@ type Album struct {
 	AlbumImg   string `json:"AlbumImg"`
 }
 
-// TODO: type Playlist struct
+// A Playlist object (for front-end) with filtered JSON
+type Playlist struct {
+	PlaylistID   string `json:"PlaylistID"`
+	PlaylistName string `json:"PlaylistName"`
+}
 
 // Load environment vars from file
 func getEnvVars() {
@@ -117,6 +120,50 @@ func SearchByAlbum(albumName string) []Album {
 	return albumList
 }
 
+func SearchByArtist(artistName string) []Artist {
+	client := getSpotifyClient()
+
+	// Search for an artist containing "artistName"
+	result, err := client.Search(artistName, spotify.SearchTypeArtist)
+	if err != nil {
+		log.Fatalf("Error retrieving artist data: %v", err)
+	}
+
+	var artistList []Artist
+	length := len(result.Artists.Artists)
+
+	for i := 0; i < length; i++ {
+		artist := result.Artists.Artists[i]
+		artistID := artist.SimpleArtist.ID.String()
+		artistName := artist.SimpleArtist.Name
+		artistList = append(artistList, Artist{artistID, artistName})
+	}
+
+	return artistList
+}
+
+func SearchByPlaylist(playlistName string) []Playlist {
+	client := getSpotifyClient()
+
+	// Search for an artist containing "artistName"
+	result, err := client.Search(playlistName, spotify.SearchTypePlaylist)
+	if err != nil {
+		log.Fatalf("Error retrieving artist data: %v", err)
+	}
+
+	var playlistList []Playlist
+	length := len(result.Playlists.Playlists)
+
+	for i := 0; i < length; i++ {
+		playlist := result.Playlists.Playlists[i]
+		playlistID := playlist.ID.String()
+		playlistName := playlist.Name
+		playlistList = append(playlistList, Playlist{playlistID, playlistName})
+	}
+
+	return playlistList
+}
+
 func searchSong(song *gin.Context) {
 	songName := song.Param("songName")
 	songList := SearchBySong(songName)
@@ -136,7 +183,24 @@ func searchAlbum(album *gin.Context) {
 	album.IndentedJSON(http.StatusOK, albumList)
 }
 
+func searchArtist(artist *gin.Context) {
+	artistName := artist.Param("artistName")
+	artistList := SearchByArtist(artistName)
+
+	artist.IndentedJSON(http.StatusOK, artistList)
+}
+
+func searchPlaylist(playlist *gin.Context) {
+	playlistName := playlist.Param("playlistName")
+	playlistList := SearchByPlaylist(playlistName)
+
+	playlist.IndentedJSON(http.StatusOK, playlistList)
+}
+
 func Init(router *gin.Engine) {
 	router.GET("/search/song/:songName", searchSong)
 	router.GET("/search/album/:albumName", searchAlbum)
+	router.GET("/search/artist/:artistName", searchArtist)
+	router.GET("/search/playlist/:playlistName", searchPlaylist)
+
 }

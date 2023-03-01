@@ -1,9 +1,10 @@
-package search_test
+package search
 
 import (
-	"Karaokifyy/backend/search"
+	"testing"
 )
 
-func main() {
-	search.SearchBySong("Word")
+func TestSearchBySong(t *testing.T) {
+	result := SearchBySong("Bohemian%20Rhapsody")
+	expected := []Song{}
 }
