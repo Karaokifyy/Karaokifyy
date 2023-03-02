@@ -38,6 +38,6 @@ const appRoutes: Routes = [
     RouterModule.forRoot([])
   ],
   providers: [UsersService, ItunesService, HTTPINTProviders],
-  bootstrap: [AppComponent, SearchScreenItIsComponent, HomeScreenComponent]
+  bootstrap: [AppComponent]
 })
 export class AppModule { }
