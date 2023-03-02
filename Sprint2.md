@@ -1,7 +1,7 @@
 # Sprint 2
 
 ## Video Links
-
+https://youtu.be/1qtlWyva4ik 
 ## Issues
 
 ### Issues Completed
