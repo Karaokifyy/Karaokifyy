@@ -25,18 +25,29 @@ export class SearchScreenItIsComponent implements OnInit{
 
   // ngOnInit(): void {}
     
-  
+  httpData : any[] = [];
   ngOnInit(){
     const url = `http://localhost:8080/newSpotifySession`;
+    
     this.route.queryParamMap
     .subscribe(params => {
-      this.http.post(url, JSON.stringify({o_code:params.get("code")})).subscribe()
+      this.http.post(url, JSON.stringify({o_code:params.get("code")})).subscribe(data =>{
+        const serverResult = JSON.parse(JSON.stringify(data))
+        console.log(serverResult)
+        const mapResult = Object.entries(serverResult)
+        console.log(mapResult)
+        for (let i = 0; i < mapResult.length; i++) {
+          this.httpData.push(mapResult[i][1])
+          console.log(mapResult[i][1])
+        } 
+        
+      })
       console.log(JSON.stringify({o_code:params.get("code")}))
       console.log(params.get("code"))})
       
   }
 
-  httpData = [];
+  // httpData = [];
 
   httpResult = ($event: any) => {
     const url = `https://itunes.apple.com/search?term=${$event}&limit=500`;
