@@ -19,6 +19,8 @@
 ### Issues in Progress
 - Error handling for Spotify API results to front-end
 
+---
+
 ## Front-end
 
 ### Cypress Testing
@@ -40,8 +42,9 @@ Utilizing the Cypress software we have implemented 3 tests to run in sprint2.cy.
 - TestSearchByPlaylist
   - Tests the playlist search function by passing the string of a playlist name, and comparing the first result retrieved from the Spotify API against the inputted expected result.
 
-
 ---
+
+<br />
 
 
 # API Documentation
