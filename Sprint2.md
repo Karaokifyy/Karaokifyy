@@ -8,7 +8,7 @@
 - Front-end and back-end integration
 - Create an API for our front-end to display Spotify search results
   - We completed an API for our application to send filtered JSON results from the Spotify API to our front-end, including searches for songs, albums, artists, and playlists.
-  -Redirect to spotify login screen to recieve authorization of user__
+  -Redirect to spotify login screen to recieve authorization of user
   -Redirect back to search dashboard with credentials from user
   -send post request to server with spotify authorization code as a json object
   -recieve a json object from server with user's playlist songs and image
