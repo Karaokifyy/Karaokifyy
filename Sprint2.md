@@ -5,8 +5,15 @@
 ## Issues
 
 ### Issues Completed
+- Front-end and back-end integration
+- Create an API for our front-end to display Spotify search results
+  - We completed an API for our application to send filtered JSON results from the Spotify API to our front-end, including searches for songs, albums, artists, and playlists.
+- Parse Spotify API results to make them usable for the front-end
+  - Structs were implemented in order to create objects for search results that were usable and readable since the Spotify API returns lots of information we didn't need.
+- Complete unit testing for our API
 
 ### Issues in Progress
+- Error handling for Spotify API results to front-end
 
 ## Front-end
 
