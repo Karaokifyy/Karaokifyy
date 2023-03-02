@@ -6,6 +6,7 @@
 
 ### Issues Completed
 - Front-end and back-end integration
+- Used spotify API to access users' private playlists
 - Create an API for our front-end to display Spotify search results
   - We completed an API for our application to send filtered JSON results from the Spotify API to our front-end, including searches for songs, albums, artists, and playlists.
 - Parse Spotify API results to make them usable for the front-end
