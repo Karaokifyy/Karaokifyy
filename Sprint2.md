@@ -12,6 +12,8 @@
 - Parse Spotify API results to make them usable for the front-end
   - Structs were implemented in order to create objects for search results that were usable and readable since the Spotify API returns lots of information we didn't need.
 - Complete unit testing for our API
+- Frontend Cypress and Jasmine Unit tests completed
+- Frontend cosmetic code implemented for search screen
 
 ### Issues in Progress
 - Error handling for Spotify API results to front-end
