@@ -37,4 +37,4 @@ Utilizing the Cypress software we have implemented 3 tests to run in sprint2.cy.
   - Tests the playlist search function by passing the string of a playlist name, and comparing the first result retrieved from the Spotify API against the inputted expected result.
 
 
-### API Documentation
+# API Documentation
