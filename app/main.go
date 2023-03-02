@@ -29,10 +29,15 @@ func main() {
 	// 	http.Redirect(w, r, "/client/Karaokify/dist/karaokify/index.html", http.StatusFound)
 	// })
 
-	r.HandleFunc("/track/{trackName}", spotify_api.GetTrackByName).Methods("GET")
-	r.HandleFunc("/albums", spotify_api.GetAlbums).Methods("GET")
-	r.HandleFunc("/albums/{id}", spotify_api.GetAlbumByID).Methods("GET")
-	r.HandleFunc("/albums", spotify_api.PostAlbums).Methods("POST")
+	r.HandleFunc("/search/song/{songName}", spotify_api.SearchSong).Methods("GET")
+	r.HandleFunc("/search/album/{albumName}", spotify_api.SearchAlbum).Methods("GET")
+	r.HandleFunc("/search/artist/{artistName}", spotify_api.SearchArtist).Methods("GET")
+	r.HandleFunc("/search/playlist/{playlistName}", spotify_api.SearchPlaylist).Methods("GET")
+
+	// r.HandleFunc("/track/{trackName}", spotify_api.GetTrackByName).Methods("GET")
+	// r.HandleFunc("/albums", spotify_api.GetAlbums).Methods("GET")
+	// r.HandleFunc("/albums/{id}", spotify_api.GetAlbumByID).Methods("GET")
+	// r.HandleFunc("/albums", spotify_api.PostAlbums).Methods("POST")
 
 	r.HandleFunc("/newSpotifySession", newSpotifySession)
 	http.ListenAndServe(":8080", r)
