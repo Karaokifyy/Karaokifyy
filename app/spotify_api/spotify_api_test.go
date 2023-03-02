@@ -1,10 +1,22 @@
 package spotify_api
 
 import (
+	"log"
 	"testing"
+
+	"github.com/joho/godotenv"
 )
 
+// Load environment vars from file
+func getEnvVars() {
+	err := godotenv.Load("../config/cred.env")
+	if err != nil {
+		log.Fatal("Error loading .env file")
+	}
+}
+
 func TestSearchBySong(t *testing.T) {
+	getEnvVars()
 	result := SearchBySong("Bohemian%20Rhapsody")[0]
 	expected := Song{
 		"7tFiyTwD0nx5a1eklYtX2J",
@@ -23,6 +35,7 @@ func TestSearchBySong(t *testing.T) {
 }
 
 func TestSearchByAlbum(t *testing.T) {
+	getEnvVars()
 	result := SearchByAlbum("Party")[0]
 	expected := Album{
 		"1xwhNJCfTwuRia7Cpo7IbJ",
@@ -39,10 +52,9 @@ func TestSearchByAlbum(t *testing.T) {
 }
 
 func TestSearchByArtist(t *testing.T) {
+	getEnvVars()
 	result := SearchByArtist("Queen")[0]
-	expected := Artist{
-		"1dfeR4HaWDbWqFHLkxsg1d",
-		"Queen"}
+	expected := Artist{"1dfeR4HaWDbWqFHLkxsg1d", "Queen"}
 
 	if (result.ArtistID != expected.ArtistID) ||
 		(result.ArtistName != expected.ArtistName) {
@@ -50,11 +62,10 @@ func TestSearchByArtist(t *testing.T) {
 	}
 }
 
-func TestSearchByPlaylist2(t *testing.T) {
+func TestSearchByPlaylist(t *testing.T) {
+	getEnvVars()
 	result := SearchByPlaylist("Queen")[0]
-	expected := Playlist{
-		"37i9dQZF1DWSIO2QWRavWZ",
-		"Queen"}
+	expected := Playlist2{"37i9dQZF1DWSIO2QWRavWZ", "Queen"}
 
 	if (result.PlaylistID != expected.PlaylistID) ||
 		(result.PlaylistName != expected.PlaylistName) {

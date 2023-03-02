@@ -43,6 +43,12 @@ type Playlist2 struct {
 	PlaylistName string `json:"PlaylistName"`
 }
 
+type Playlist struct {
+	Name   string          `json:"name"`
+	Images []spotify.Image `json:"images"`
+	URI    spotify.URI     `json:"uri"`
+}
+
 // Authenticates token and returns a Spotify client
 func getSpotifyClient() spotify.Client {
 	cid := os.Getenv("ClientID")
@@ -194,27 +200,19 @@ func SearchPlaylist(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(playlistList)
 }
 
-//Object to represent a spotify user and their unique/temp session
-type SpotifyUserSession struct
-{
-	Initial_oauth_code string `json:"o_code"`
+// Object to represent a spotify user and their unique/temp session
+type SpotifyUserSession struct {
+	Initial_oauth_code  string `json:"o_code"`
 	Initial_oauth_state string `json:"o_state"`
-	Redirect_uri string `json:"redirect_uri"`
-	
-	Access_token string `json:"access_token"`
-	Token_type string `json:"token_type"`
-	Scope string `json:"scope"`
-	Expires_in int `json:"expires_in"`
+	Redirect_uri        string `json:"redirect_uri"`
+
+	Access_token  string `json:"access_token"`
+	Token_type    string `json:"token_type"`
+	Scope         string `json:"scope"`
+	Expires_in    int    `json:"expires_in"`
 	Refresh_token string `json:"refresh_token"`
 
 	client spotify.Client
-}
-
-type Playlist struct
-{
-	Name string `json:"name"`
-	Images []spotify.Image	`json:"images"`
-	URI spotify.URI `json:"uri"`
 }
 
 func RequestAccessToken(user *SpotifyUserSession) error {
@@ -232,9 +230,9 @@ func RequestAccessToken(user *SpotifyUserSession) error {
 		ClientSecret: sec,
 		TokenURL:     spotify.TokenURL,
 		EndpointParams: map[string][]string{
-			"grant_type":{"authorization_code"},
-			"code":{user.Initial_oauth_code},
-			"redirect_uri":{user.Redirect_uri}},
+			"grant_type":   {"authorization_code"},
+			"code":         {user.Initial_oauth_code},
+			"redirect_uri": {user.Redirect_uri}},
 	}
 
 	accessToken, err := authConfig.Token(context.Background())
@@ -253,11 +251,11 @@ func GetUserPlaylists(user *SpotifyUserSession) (output map[string]Playlist, err
 	playlists, err_pl := user.client.CurrentUsersPlaylists()
 	output = make(map[string]Playlist)
 
-	if err_pl != nil{
+	if err_pl != nil {
 		err = errors.New("couldn't get user's playlists")
 		return
 	}
-	for _, playlist := range playlists.Playlists{
+	for _, playlist := range playlists.Playlists {
 		output[playlist.Name] = Playlist{playlist.Name, playlist.Images, playlist.URI}
 	}
 
