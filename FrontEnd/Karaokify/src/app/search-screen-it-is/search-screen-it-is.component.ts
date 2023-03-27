@@ -79,6 +79,7 @@ export class SearchScreenItIsComponent implements OnInit{
   UserLyricsPage(){
     console.log("Welcome to lyrics page" );
     //this.router.navigateByUrl('/lyrics-page');
+    window.location.href = 'http://localhost:4200/lyrics-page';
   }
 }
 
