@@ -21,6 +21,7 @@ export class SearchScreenItIsComponent implements OnInit{
 
   searchStr:String="";
   songs:any;
+  router: any;
   constructor(private http: HttpClient, private route: ActivatedRoute){}
 
   // ngOnInit(): void {}
@@ -77,6 +78,7 @@ export class SearchScreenItIsComponent implements OnInit{
 
   UserLyricsPage(){
     console.log("Welcome to lyrics page" );
+    //this.router.navigateByUrl('/lyrics-page');
   }
 }
 
