@@ -13,6 +13,8 @@ import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { ItunesService } from './services/itunes.service';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {NoopInterceptorService} from './services/intercept.service';
+import { LyricsPageComponent } from './lyrics-page/lyrics-page.component';
+import { SongsPageComponent } from './songs-page/songs-page.component';
 export const HTTPINTProviders = [
   { provide: HTTP_INTERCEPTORS, useClass: NoopInterceptorService, multi: true },
 ];
@@ -26,7 +28,9 @@ const appRoutes: Routes = [
     AppComponent,
     routingComponents,
     SearchScreenItIsComponent,
-    HomeScreenComponent
+    HomeScreenComponent,
+    LyricsPageComponent,
+    SongsPageComponent
   ],
   imports: [
     AppRoutingModule,
