@@ -1,0 +1,47 @@
+/* Lyrics Screen */
+.lyrics-screen {
+    position: relative;
+  }
+  
+  /* Background Image */
+  .background-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-image: url('background.jpg');
+    background-size: cover;
+    background-position: center;
+    filter: blur(10px);
+  }
+  
+  /* Lyrics Container */
+  .lyrics-container {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  /* Lyrics Header */
+  .lyrics-header {
+    text-align: center;
+  }
+  
+  .lyrics-header h1 {
+    font-size: 36px;
+    margin-bottom: 0;
+  }
+  
+  .lyrics-header h2 {
+    font-size: 24px;
+    margin-top: 0;
+  }
+  
+  /* Lyrics Body */
+  .lyrics-body {
+    max-width: 800px;
+    text-align: center;
+  }
