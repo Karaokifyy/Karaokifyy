@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../services/spotify.service';
 import { ItunesService } from '../services/itunes.service';
+import { UsersService } from '../services/user.service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import {
@@ -10,6 +11,7 @@ import { Injectable } from '@angular/core';
 import { NoopInterceptorService } from '../services/intercept.service';
 import { ActivatedRoute } from '@angular/router';
 import { param } from 'cypress/types/jquery';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-screen-it-is',
@@ -20,8 +22,8 @@ import { param } from 'cypress/types/jquery';
 export class SearchScreenItIsComponent implements OnInit{
 
   searchStr:String="";
-  songs:any;
-  constructor(private http: HttpClient, private route: ActivatedRoute){}
+  srch:string="";
+  constructor(private http: HttpClient, private route: ActivatedRoute, private us:UsersService,  private router: Router){}
 
   // ngOnInit(): void {}
     
@@ -47,23 +49,12 @@ export class SearchScreenItIsComponent implements OnInit{
 
   }
 
-  selectPlaylist(playlistID:String){
-
+  selectPlaylist(playlistID:string){
+    this.us.ChangeMessage(playlistID);
+    this.router.navigateByUrl('/songs');
     const url = `http://localhost:8080/newSpotifySession`;
     console.log(playlistID);
 
-
-    // this.route.queryParamMap
-    // .subscribe(params => {
-    //   this.http.post(url, JSON.stringify({playlistID})).subscribe(data =>{
-    //     const serverResult = JSON.parse(JSON.stringify(data))
-    //     console.log(serverResult)
-    //     const mapResult = Object.entries(serverResult)
-    //     console.log(mapResult)
-    //     for (let i = 0; i < mapResult.length; i++) {
-    //       this.httpData.push(mapResult[i][1])
-    //       console.log(mapResult[i][1])
-    //     } 
   }
 
   httpResult = ($event: any) => {
