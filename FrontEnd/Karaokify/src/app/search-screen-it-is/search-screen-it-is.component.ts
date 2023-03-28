@@ -65,5 +65,9 @@ export class SearchScreenItIsComponent implements OnInit{
       console.log(data.results);
     });
   };
+
+  UserLyricsPage(){
+    console.log("Welcome to lyrics page" );
+  }
 }
 
