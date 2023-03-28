@@ -7,7 +7,7 @@ import {
 } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { NoopInterceptorService } from '../services/intercept.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { param } from 'cypress/types/jquery';
 
 @Component({
@@ -17,9 +17,10 @@ import { param } from 'cypress/types/jquery';
 })
 export class SongsPageComponent implements OnInit {
 
-  str1:string="";
+  str1:string="test";
+  str2:string="test";
   httpData : any[] = [];
-  constructor(private http: HttpClient, private route: ActivatedRoute, private us:UsersService){}
+  constructor(private http: HttpClient, private route: ActivatedRoute, private us:UsersService, private router: Router){}
 
   ngOnInit(){
     const url = `http://localhost:8080/newSpotifySession`;
@@ -42,8 +43,17 @@ export class SongsPageComponent implements OnInit {
         
       })
       console.log(JSON.stringify({playlistID:this.str1}))
-      console.log(JSON.stringify({o_code:params.get("code")}))
-      console.log(params.get("code"))})
+      //console.log(JSON.stringify({o_code:params.get("code")}))
+      //console.log(params.get("code"))
+    })
+
+  }
+
+
+  selectSongs(songID:string){
+    this.us.ChangeMessage(songID);
+    this.router.navigateByUrl('/lyrics');
+    console.log(songID);
 
   }
 }

@@ -7,7 +7,7 @@ import {HttpClientModule} from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { UsersService } from './services/user.service';
-import { AppRoutingModule, routingComponents } from './app-routing.module';
+import { AppRoutingModule, routingComponents} from './app-routing.module';
 import { SearchScreenItIsComponent } from './search-screen-it-is/search-screen-it-is.component';
 import { HomeScreenComponent } from './home-screen/home-screen.component';
 import { ItunesService } from './services/itunes.service';
