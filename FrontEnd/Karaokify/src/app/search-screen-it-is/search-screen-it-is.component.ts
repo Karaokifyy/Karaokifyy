@@ -50,7 +50,7 @@ export class SearchScreenItIsComponent implements OnInit{
   }
 
   selectPlaylist(playlistID:string){
-    this.us.ChangeMessage(playlistID);
+    this.us.ChangeMessage(playlistID.substring(17));
     this.router.navigateByUrl('/songs');
     //const url = `http://localhost:8080/newSpotifySession`;
     console.log(playlistID);
