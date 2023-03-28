@@ -1,2 +1,21 @@
-<p>lyrics-page works!</p>
-<iframe [src]='safeUrl' frameborder="0" allowfullscreen></iframe>
+<div class="row">
+    <div class="col-md-6">
+      <h3>Player</h3>
+      <iframe id="player" width="100%" height="360" [src]='safeUrl' frameborder="0" allowfullscreen></iframe>
+    </div>
+    <div class="col-md-6">
+      <h3>Lyrics</h3>
+      <div *ngIf="loading">
+        <i class="fa fa-spinner fa-spin"></i> Loading...
+      </div>
+      <pre>{{ lyrics }}</pre>
+    </div>
+  </div>
+
+
+  
+  
+  
+
+
+  
