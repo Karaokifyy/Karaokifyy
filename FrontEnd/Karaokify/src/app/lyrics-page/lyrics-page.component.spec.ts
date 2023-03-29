@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LyricsPageComponent } from './lyrics-page.component';
 import { UsersService } from '../services/user.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
+import { of } from 'rxjs';
 
 
 describe('LyricsPageComponent', () => {
@@ -12,17 +13,29 @@ describe('LyricsPageComponent', () => {
 
 
  beforeEach(() => {
-   TestBed.configureTestingModule({
-     declarations: [ LyricsPageComponent ],
-     imports: [HttpClientModule],
-     providers: [
-       { provide: UsersService, useValue: {} },
-       { provide: Router, useValue: {} }
-     ]
-   });
-   fixture = TestBed.createComponent(LyricsPageComponent);
-   component = fixture.componentInstance;
- });
+    TestBed.configureTestingModule({
+      declarations: [ LyricsPageComponent ],
+      imports: [ HttpClientModule ],
+      providers: [
+        {
+          provide: UsersService,
+          useValue: {
+            currentMessage: of('mock value')
+          }
+        },
+        { provide: Router, useValue: {} },
+        {
+          provide: ActivatedRoute,
+          useValue: {
+            snapshot: { paramMap: convertToParamMap({ id: '1' }) },
+            queryParamMap: of(convertToParamMap({}))
+          }
+        }
+      ]
+    });
+    fixture = TestBed.createComponent(LyricsPageComponent);
+    component = fixture.componentInstance;
+  });
 
 
  beforeEach(() => {
@@ -43,8 +56,13 @@ describe('LyricsPageComponent', () => {
 
  it('should contain a YouTube link', () => {
    const link = fixture.debugElement.query(By.css('a')).nativeElement;
-   (expect as any)(link.href).toContain('youtube.com');
+   (expect as any)(link.href).toContain('https://www.youtube.com/watch?v=Kq8zlXS2bUg');
  });
+
+ it('should have a YouTube link', () => {
+    const linkElement = fixture.nativeElement.querySelector('a[href*="youtube.com"]');
+    (expect as any)(linkElement).toBeTruthy();
+  });
 });
 
 
