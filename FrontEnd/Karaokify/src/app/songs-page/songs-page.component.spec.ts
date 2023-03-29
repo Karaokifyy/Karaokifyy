@@ -3,7 +3,7 @@ import { SongsPageComponent } from './songs-page.component';
 import { UsersService } from '../services/user.service';
 import { Router } from '@angular/router';
 
-describe('LyricsPageComponent', () => {
+describe('SongsPageComponent', () => {
   let component: SongsPageComponent;
   let fixture: ComponentFixture<SongsPageComponent>;
 
