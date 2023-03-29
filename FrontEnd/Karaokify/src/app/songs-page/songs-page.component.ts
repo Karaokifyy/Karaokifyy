@@ -16,6 +16,9 @@ import { param } from 'cypress/types/jquery';
   styleUrls: ['./songs-page.component.css']
 })
 export class SongsPageComponent implements OnInit {
+  buttonClicked(buttonClicked: any) {
+      throw new Error('Method not implemented.');
+  }
 
   str1:string="test";
   str2:string="test";
@@ -55,6 +58,10 @@ export class SongsPageComponent implements OnInit {
     this.router.navigateByUrl('/lyrics');
     console.log(songID);
 
+  }
+
+  public handleButtonClick(): void {
+    // ...
   }
 }
 

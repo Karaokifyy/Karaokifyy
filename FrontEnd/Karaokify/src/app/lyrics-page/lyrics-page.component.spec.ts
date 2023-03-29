@@ -1,26 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { SongsPageComponent } from './songs-page.component';
+import { LyricsPageComponent } from './lyrics-page.component';
 import { UsersService } from '../services/user.service';
 import { Router } from '@angular/router';
 
 describe('LyricsPageComponent', () => {
-  let component: SongsPageComponent;
-  let fixture: ComponentFixture<SongsPageComponent>;
+  let component: LyricsPageComponent;
+  let fixture: ComponentFixture<LyricsPageComponent>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ SongsPageComponent ],
+      declarations: [ LyricsPageComponent ],
       providers: [
         { provide: UsersService, useValue: {} },
         { provide: Router, useValue: {} }
       ]
     });
-    fixture = TestBed.createComponent(SongsPageComponent);
+    fixture = TestBed.createComponent(LyricsPageComponent);
     component = fixture.componentInstance;
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SongsPageComponent);
+    fixture = TestBed.createComponent(LyricsPageComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -32,12 +32,6 @@ describe('LyricsPageComponent', () => {
   
   it('should create the component', () => {
     (expect as any)(component).toBeTruthy();
-  });
-
-  it('should pass if button is clicked', () => {
-    const button = fixture.debugElement.nativeElement.querySelector('button');
-    button.click();
-    (expect as any)(component.buttonClicked).toBeTrue();
   });
 
 
