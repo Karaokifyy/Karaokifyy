@@ -1,7 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { SongsPageComponent } from './songs-page.component';
 import { UsersService } from '../services/user.service';
-import { Router } from '@angular/router';
+import { convertToParamMap, Router } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ActivatedRoute } from '@angular/router';
 
 describe('SongsPageComponent', () => {
   let component: SongsPageComponent;
@@ -10,9 +12,11 @@ describe('SongsPageComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       declarations: [ SongsPageComponent ],
+      imports: [ HttpClientTestingModule ],
       providers: [
         { provide: UsersService, useValue: {} },
-        { provide: Router, useValue: {} }
+        { provide: Router, useValue: {} },
+        { provide: ActivatedRoute, useValue: { snapshot: { paramMap: convertToParamMap({ id: '1' }) } } }
       ]
     });
     fixture = TestBed.createComponent(SongsPageComponent);

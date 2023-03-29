@@ -28,27 +28,27 @@ export class SongsPageComponent implements OnInit {
   ngOnInit(){
     const url = `http://localhost:8080/newSpotifySession`;
 
-    this.us.currentMessage.subscribe(
-      (message) => (this.str1 = message)
-    );
+    // this.us.currentMessage.subscribe(
+    //   (message) => (this.str1 = message)
+    // );
 
-    this.route.queryParamMap
-    .subscribe(params => {
-      this.http.post(url, JSON.stringify({playlistID:this.str1})).subscribe(data =>{
-        const serverResult = JSON.parse(JSON.stringify(data))
-        console.log(serverResult)
-        const mapResult = Object.entries(serverResult)
-        console.log(mapResult)
-        for (let i = 0; i < mapResult.length; i++) {
-          this.httpData.push(mapResult[i][1])
-          console.log(mapResult[i][1])
-        } 
+    // this.route.queryParamMap
+    // .subscribe(params => {
+    //   this.http.post(url, JSON.stringify({playlistID:this.str1})).subscribe(data =>{
+    //     const serverResult = JSON.parse(JSON.stringify(data))
+    //     console.log(serverResult)
+    //     const mapResult = Object.entries(serverResult)
+    //     console.log(mapResult)
+    //     for (let i = 0; i < mapResult.length; i++) {
+    //       this.httpData.push(mapResult[i][1])
+    //       console.log(mapResult[i][1])
+    //     } 
         
-      })
-      console.log(JSON.stringify({playlistID:this.str1}))
-      //console.log(JSON.stringify({o_code:params.get("code")}))
-      //console.log(params.get("code"))
-    })
+    //   })
+    //   console.log(JSON.stringify({playlistID:this.str1}))
+    //   //console.log(JSON.stringify({o_code:params.get("code")}))
+    //   //console.log(params.get("code"))
+    // })
 
   }
 
