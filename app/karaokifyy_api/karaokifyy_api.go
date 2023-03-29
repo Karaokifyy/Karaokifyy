@@ -1,4 +1,4 @@
-package karaokify_api
+package karaokifyy_api
 
 import (
 	"encoding/json"
