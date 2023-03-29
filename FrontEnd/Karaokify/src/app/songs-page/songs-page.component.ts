@@ -45,7 +45,7 @@ export class SongsPageComponent implements OnInit {
         } 
         
       })
-      console.log(JSON.stringify({playlistID:this.str1}))
+      //console.log(JSON.stringify({playlistID:this.str1}))
       //console.log(JSON.stringify({o_code:params.get("code")}))
       //console.log(params.get("code"))
     })
