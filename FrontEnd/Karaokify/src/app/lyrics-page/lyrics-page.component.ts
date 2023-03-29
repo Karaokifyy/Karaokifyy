@@ -10,7 +10,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class LyricsPageComponent implements OnInit {
 
-  str1:string="";
+  str1:string="Kq8zlXS2bUg";
   str2:string="https://www.youtube.com/embed/";
   httpData : any[] = [];
   safeUrl:any;
@@ -21,8 +21,8 @@ export class LyricsPageComponent implements OnInit {
       (message) => (this.str1 = message)
     );
 
-    //this.str2=this.str2+this.str1;
-    this.str2=this.str2+"Kq8zlXS2bUg";
+    this.str2=this.str2+this.str1;
+    //this.str2=this.str2+"Kq8zlXS2bUg";
 
     this.safeUrl=this._san.bypassSecurityTrustResourceUrl(this.str2);
     
