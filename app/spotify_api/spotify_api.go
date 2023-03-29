@@ -44,6 +44,7 @@ type Playlist2 struct {
 }
 
 type Playlist struct {
+	ID     string          `json:"ID"`
 	Name   string          `json:"name"`
 	Images []spotify.Image `json:"images"`
 	URI    spotify.URI     `json:"uri"`
@@ -163,6 +164,30 @@ func SearchByPlaylist(playlistName string) []Playlist2 {
 	return playlistList
 }
 
+func GetByPlaylistID(playlistID string) []Song {
+	client := getSpotifyClient()
+
+	result, err := client.GetPlaylist(spotify.ID(playlistID))
+	if err != nil {
+		log.Fatalf("Error retrieving playlist data: %v", err)
+	}
+
+	var songList []Song
+	length := len(result.Tracks.Tracks)
+
+	for i := 0; i < length; i++ {
+		track := result.Tracks.Tracks[i].Track
+		songID := track.SimpleTrack.ID.String()
+		songName := track.SimpleTrack.Name
+		artistName := track.SimpleTrack.Artists[0].Name
+		songLength := float32(track.SimpleTrack.Duration) / 1000
+		albumImg := track.Album.Images[1].URL
+		songList = append(songList, Song{songID, songName, artistName, songLength, albumImg})
+	}
+
+	return songList
+}
+
 func SearchSong(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	songName := vars["songName"]
@@ -256,10 +281,18 @@ func GetUserPlaylists(user *SpotifyUserSession) (output map[string]Playlist, err
 		return
 	}
 	for _, playlist := range playlists.Playlists {
-		output[playlist.Name] = Playlist{playlist.Name, playlist.Images, playlist.URI}
+		output[playlist.Name] = Playlist{string(playlist.ID), playlist.Name, playlist.Images, playlist.URI}
 	}
 
 	return
+}
+
+func GetPlaylist(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	playlistID := vars["playlistID"]
+	trackList := GetByPlaylistID(playlistID)
+
+	json.NewEncoder(w).Encode(trackList)
 }
 
 // Connect to Spotify api and returns track search results via:

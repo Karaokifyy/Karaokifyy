@@ -33,6 +33,7 @@ func main() {
 	r.HandleFunc("/search/album/{albumName}", spotify_api.SearchAlbum).Methods("GET")
 	r.HandleFunc("/search/artist/{artistName}", spotify_api.SearchArtist).Methods("GET")
 	r.HandleFunc("/search/playlist/{playlistName}", spotify_api.SearchPlaylist).Methods("GET")
+	r.HandleFunc("/user/playlist/{playlistID}", spotify_api.GetPlaylist).Methods("GET")
 
 	// r.HandleFunc("/track/{trackName}", spotify_api.GetTrackByName).Methods("GET")
 	// r.HandleFunc("/albums", spotify_api.GetAlbums).Methods("GET")
@@ -45,8 +46,7 @@ func main() {
 
 var spotify_users map[string]spotify_api.SpotifyUserSession = make(map[string]spotify_api.SpotifyUserSession)
 
-
-func newSpotifySession(w http.ResponseWriter, r *http.Request){
+func newSpotifySession(w http.ResponseWriter, r *http.Request) {
 	log.Printf("Called newSpotifySession\n")
 	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
 	//retrieving initial json paramaters and setting redirect0rui
@@ -59,8 +59,8 @@ func newSpotifySession(w http.ResponseWriter, r *http.Request){
 
 	//requesting access_token
 	log.Printf("requesting access_token\n")
-	if err := spotify_api.RequestAccessToken(&newUser); err != nil{
-		log.Fatalf("couldn't retrive access token")//convert to non-fatal or return
+	if err := spotify_api.RequestAccessToken(&newUser); err != nil {
+		log.Fatalf("couldn't retrive access token") //convert to non-fatal or return
 	}
 
 	log.Printf("getting user playlist\n")
@@ -69,7 +69,7 @@ func newSpotifySession(w http.ResponseWriter, r *http.Request){
 	if err != nil {
 		log.Fatalf("Couldn't get user's playlist")
 	}
-	
+
 	json.NewEncoder(log.Default().Writer()).Encode(playlists)
 	json.NewEncoder(w).Encode(playlists)
 	// for _, playlist := range playlists {
