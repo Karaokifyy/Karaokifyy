@@ -3,6 +3,7 @@ import { LyricsPageComponent } from './lyrics-page.component';
 import { UsersService } from '../services/user.service';
 import { Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { By } from '@angular/platform-browser';
 
 describe('LyricsPageComponent', () => {
   let component: LyricsPageComponent;
@@ -34,6 +35,11 @@ describe('LyricsPageComponent', () => {
   
   it('should create the component', () => {
     (expect as any)(component).toBeTruthy();
+  });
+
+  it('should contain a YouTube link', () => {
+    const link = fixture.debugElement.query(By.css('a')).nativeElement;
+    (expect as any)(link.href).toContain('youtube.com');
   });
 });
 
