@@ -12,6 +12,7 @@ import (
 
 	//	"github.com/zmb3/spotify"
 	//	"golang.org/x/oauth2/clientcredentials"
+	"github.com/Karaokifyy/Karaokifyy/app/karaokify_api"
 	"github.com/Karaokifyy/Karaokifyy/app/spotify_api"
 )
 
@@ -34,6 +35,7 @@ func main() {
 	r.HandleFunc("/search/artist/{artistName}", spotify_api.SearchArtist).Methods("GET")
 	r.HandleFunc("/search/playlist/{playlistName}", spotify_api.SearchPlaylist).Methods("GET")
 	r.HandleFunc("/user/playlist/{playlistID}", spotify_api.GetPlaylist).Methods("GET")
+	r.HandleFunc("/karaokify/{songID}", karaokify_api.GetAudioLyrics).Methods("GET")
 
 	// r.HandleFunc("/track/{trackName}", spotify_api.GetTrackByName).Methods("GET")
 	// r.HandleFunc("/albums", spotify_api.GetAlbums).Methods("GET")

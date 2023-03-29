@@ -69,6 +69,19 @@ func getSpotifyClient() spotify.Client {
 	return spotify.Authenticator{}.NewClient(accessToken)
 }
 
+// Get a song name from a Spotify song ID
+func GetSongName(songID string) string {
+	client := getSpotifyClient()
+
+	// Get track data from Spotify
+	result, err := client.GetTrack(spotify.ID(songID))
+	if err != nil {
+		log.Fatalf("Error retrieving track data: %v", err)
+	}
+
+	return result.SimpleTrack.Name
+}
+
 // Takes string and performs a Spotify song search
 // Returns a slice of Song structs
 func SearchBySong(songName string) []Song {
@@ -164,6 +177,8 @@ func SearchByPlaylist(playlistName string) []Playlist2 {
 	return playlistList
 }
 
+// Fetches a playlist using playlist ID, and returns the tracks from that playlist
+// as a slice of song structs
 func GetByPlaylistID(playlistID string) []Song {
 	client := getSpotifyClient()
 
@@ -272,6 +287,7 @@ func RequestAccessToken(user *SpotifyUserSession) error {
 	return nil
 }
 
+// Getter for a list of a user's Spotify playlists
 func GetUserPlaylists(user *SpotifyUserSession) (output map[string]Playlist, err error) {
 	playlists, err_pl := user.client.CurrentUsersPlaylists()
 	output = make(map[string]Playlist)
@@ -287,8 +303,8 @@ func GetUserPlaylists(user *SpotifyUserSession) (output map[string]Playlist, err
 	return
 }
 
+// Getter for playlist using a playlist ID
 func GetPlaylist(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
 	vars := mux.Vars(r)
 	playlistID := vars["playlistID"]
 	trackList := GetByPlaylistID(playlistID)
