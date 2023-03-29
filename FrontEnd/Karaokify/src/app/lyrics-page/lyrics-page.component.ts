@@ -17,7 +17,7 @@ export class LyricsPageComponent implements OnInit {
   constructor(private http: HttpClient, private us:UsersService, private _san:DomSanitizer){}
 
   ngOnInit(): void {
-    this.us.currentMessage.subscribe(
+    var num = this.us.currentMessage.subscribe(
       (message) => (this.str1 = message)
     );
 
