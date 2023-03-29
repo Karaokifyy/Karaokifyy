@@ -25,7 +25,7 @@ export class LyricsPageComponent implements OnInit {
     this.str2=this.str2+"Kq8zlXS2bUg";
 
     this.safeUrl=this._san.bypassSecurityTrustResourceUrl(this.str2);
-
+    
 
 
   }
