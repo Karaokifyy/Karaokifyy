@@ -65,8 +65,7 @@ Descriptions of each available endpoint and results are included below.
 
 ### __What is Karaokiffy?__
 
-Karaokiffy is an app for searching Spotify to make and modify a karaoke queue.<br/>
-Each user can store and share their queues, using Spotify's Playlist functionality.
+Karaokiffy is an app that utilizes Spotify and Youtube's APIs in conjunction with LRC files from a database for karaoke from a user's Spotify Playlist.<br/> 
 
 ---
 
