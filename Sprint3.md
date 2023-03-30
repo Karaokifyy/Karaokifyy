@@ -6,7 +6,7 @@
 
 ## Front-end
 
-We added unit tests using the .spec.ts files for each component of our app. These tests verified that the components were rendered correctly.
+We added unit tests using the ```.spec.ts``` files for each component of our app. These tests verified that the components were rendered correctly.
 
 For this Sprint, we used Cypress tests to verify are routing was working and to simulate going through the application. The simulation goes through the entire cycle of logging in, picking your desired playlist, picking your desired song, and recieving a kareoke video from youtube.
 It was also used to look for elements on the screen to validate that the output was correct.
