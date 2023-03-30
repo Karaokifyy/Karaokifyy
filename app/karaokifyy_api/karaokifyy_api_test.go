@@ -17,39 +17,10 @@ func getEnvVars() {
 
 func TestGetAudioLyrics(t *testing.T) {
 	getEnvVars()
-	audio, lyrics := GetAudioLyrics("5ihS6UUlyQAfmp48eSkxuQ")
+	audio, lyrics := GetAudioLyrics("2lXDbdbBw7lJVCWHkYxdep")
 	result := AudioLyrics{audio, lyrics}
 	expected := AudioLyrics{
-		"https://www.youtube.com/watch?v=radHy4HhhNg&ab_channel=FleetwoodMac-Topic", `[00:12.62]I took my love, I took it down
-[00:18.40]Climbed a mountain and I turned around
-[00:23.11]And I saw my reflection in the snow covered hills
-[00:29.47]'Til the landslide brought it down
-
-[00:35.98]Oh, mirror in the sky, What is love?
-[00:41.85]Can the child within my heart rise above?
-[00:48.01]Can I sail thru the changin' ocean tides?
-[00:53.80]Can I handle the seasons of my life?
-
-[01:11.77]Well, I've been afraid of changin'
-[01:16.71]'Cause I've built my life around you
-[01:23.39]But time makes you bolder
-[01:26.65]Even children get older
-[01:30.02]And I'm getting older too
-[02:00.42]Well, I've been afraid of changin'
-[02:05.67]'Cause I've built my life around you
-[02:12.48]But time makes you bolder
-[02:15.52]Even children get older
-[02:18.70]And I'm getting older too
-[02:24.88]And I'm getting older too
-
-[02:31.02]Ahh, take my love, take it down
-[02:38.34]Ahh, Climb a mountain and turn around
-[02:43.03]And if you see my reflection in the snow covered hills
-[02:49.30]Well the landslide will bring it down
-[02:54.85]And if you see my reflection in the snow covered hills
-[03:02.73]Well the landslide will bring it down
-
-[03:09.14]Oh, The landslide will bring it down`}
+		"FyZybpwOBoY", "[00:13.18] He said, \"Let's get out of this town\n[00:16.59] Drive out of the city, away from the crowds\"\n[00:20.00] I thought Heaven can't help me now\n[00:23.30] Nothing lasts forever\n[00:25.76] But this is gonna take me down\n[00:27.94] He's so tall and handsome as hell\n[00:31.17] He's so bad, but he does it so well\n[00:34.42] I can see the end as it begins\n[00:37.85] My one condition is\n[00:41.25] Say you'll remember me\n[00:43.78] Standing in a nice dress\n[00:45.48] Staring at the sunset, babe\n[00:48.17] Red lips and rosy cheeks\n[00:50.67] Say you'll see me again\n[00:52.57] Even if it's just in your wildest dreams, ah-ah, ha\n[01:01.92] Wildest dreams, ah-ah, ha\n[01:08.58] \n[01:11.51] I said, \"No one has to know what we do\"\n[01:14.56] His hands are in my hair, his clothes are in my room\n[01:18.75] And his voice is a familiar sound\n[01:21.78] Nothing lasts forever\n[01:23.95] But this is getting good now\n[01:26.20] He's so tall and handsome as hell\n[01:29.43] He's so bad, but he does it so well\n[01:32.88] And when we've had our very last kiss\n[01:36.03] My last request is\n[01:39.48] Say you'll remember me\n[01:42.15] Standing in a nice dress\n[01:43.73] Staring at the sunset, babe\n[01:46.58] Red lips and rosy cheeks\n[01:48.97] Say you'll see me again\n[01:50.76] Even if it's just in your wildest dreams, ah-ah, ha (ha-ah, ha)\n[02:00.26] Wildest dreams, ah-ah, ha\n[02:06.86] You'll see me in hindsight\n[02:08.76] Tangled up with you all night\n[02:10.47] Burning it down\n[02:13.82] Someday when you leave me\n[02:15.69] I bet these memories\n[02:17.44] Follow you around\n[02:20.46] You'll see me in hindsight\n[02:22.44] Tangled up with you all night\n[02:24.19] Burning (burning) it (it) down (down)\n[02:27.43] Someday when you leave me\n[02:29.33] I bet these memories\n[02:31.04] Follow (follow) you (you) around (follow you around)\n[02:37.71] Say you'll remember me\n[02:40.68] Standing in a nice dress\n[02:42.28] Staring at the sunset, babe\n[02:44.82] Red lips and rosy cheeks\n[02:47.34] Say you'll see me again\n[02:49.13] Even if it's just pretend\n[02:53.22] Say you'll remember me\n[02:55.89] Standing in a nice dress\n[02:57.51] Staring at the sunset, babe\n[03:00.24] Red lips and rosy cheeks\n[03:02.78] Say you'll see me again\n[03:04.46] Even if it's just (pretend, just pretend) in your wildest dreams, ah-ah, ha (ah)\n[03:13.03] In your wildest dreams, ah-ah, ha\n[03:18.32] Even if it's just stayed in your wildest dreams, ah-ah, ha\n[03:26.78] In your wildest dreams, ah-ah, ha\n[03:33.43] "}
 
 	if (result.SongURL != expected.SongURL) ||
 		(result.SongLyrics != expected.SongLyrics) {
