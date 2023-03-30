@@ -66,7 +66,7 @@ We also implemented a new API functionality ```karaokifyy_api.go``` that include
 
 
 ## __General__
-This documentation can be used to access the Karaokiffy API.<br/>
+This documentation can be used to access the Karaokifyy API.<br/>
 Descriptions of each available endpoint and results are included below.
 
 ### __What is Karaokiffy?__
