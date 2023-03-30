@@ -78,7 +78,7 @@ To perform various searches, you will send a ```GET``` request to the relevant e
 
 ---
 
-###__Get Audio Link and Lyric File for a Song__
+### __Get Audio Link and Lyric File for a Song__
 
 To get an audio link and lyric file for a song, you use the ```/karaokifyy/:songID``` endpoint. <br/>
 The results will include an audio YouTube link of the song and an LRC file with the lyrics. The information is displayed as:
