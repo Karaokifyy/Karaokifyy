@@ -33,6 +33,7 @@ It was also used to look for elements on the screen to validate that the output 
    - Complete unit testing of API functions
 
 ### Issues in Progress
+   - Implementation of database queries into our API
 
 ---
 
@@ -46,6 +47,7 @@ It was also used to look for elements on the screen to validate that the output 
    - [What is Karaokiffy?](#what-is-karaokiffy)
 
 [How to use the API](#how-to-use-the-api)
+   - [Get audio link and lyric file for a song](#get-audio-link-and-lyric-file-for-a-song)
    - [Get tracks from a playlist](#get-tracks-from-a-playlist)
    - [Search for a song](#search-for-a-song)
    - [Search for an album](#search-for-an-album)
@@ -73,6 +75,16 @@ Karaokiffy is an app that utilizes Spotify and Youtube's APIs in conjunction wit
 
 To perform various searches, you will send a ```GET``` request to the relevant endpoint.
 > _Note: Make sure to properly convert invalid characters (e.g. a space ```" "``` should be converted to ```%20```)_
+
+---
+
+###__Get Audio Link and Lyric File for a Song__
+
+To get an audio link and lyric file for a song, you use the ```/karaokifyy/:songID``` endpoint. <br/>
+The results will include an audio YouTube link of the song and an LRC file with the lyrics. The information is displayed as:
+
+> -  **_SongURL:_** YouTube link to the audio of the song as a string
+> -  **_SongLyrics:_** Song lyrics in LRC format
 
 ---
 
