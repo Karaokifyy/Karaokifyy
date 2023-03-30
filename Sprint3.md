@@ -270,15 +270,10 @@ http://localhost:40/search/playlist/Party
 
 ## __Other__
 The API backend uses the ```Spotify Web API``` to retrieve song-related data.<br/>
-<img src="https://developer.spotify.com/assets/branding-guidelines/logos.svg"
-     alt="Spotify"/>
 > See: https://developer.spotify.com/documentation/web-api/
 
 <br/>
 
 The API backend uses the ```gorilla/mux``` Go package for request routing and handling.<br/>
-<img src="https://cloud-cdn.questionable.services/gorilla-icon-64.png"
-     alt="GorillaMux"/>
-
 > See: https://www.gorillatoolkit.org/pkg/mux
 
