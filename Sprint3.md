@@ -34,6 +34,7 @@ It was also used to look for elements on the screen to validate that the output 
 
 ### Issues in Progress
    - Implementation of database queries into our API
+   - Access YouTube search using YouTube's API
 
 ---
 
