@@ -31,10 +31,14 @@ For the back-end, in Sprint 3 we implemented a GetPlaylistByID function in ```sp
 
 We also implemented a new API functionality ```karaokifyy_api.go``` that includes our functions for serving a YouTube audio link and LRC lyric file of a specific song using its Spotify song ID to the front-end via the ```/karaokifyy/:songID``` endpoint. Unit tests were also implemented to test our API functionality that we completed in Sprint 3. 
 
+In addition to our added API functionality, we created a database for song lyrics using Spotify's song ID as the primary key. The lyrics were obtained from multiple web sources using an LRC Scraper. We also started the implementation of Youtube's API so that we can serve Youtube videos as our audio to the front-end, and will continue with its implementation in the next sprint. 
+
 ### Issues Completed
    - Create API functions and a router endpoint for serving songs from a user's playlist to the front-end
    - Create API functions and router endpoint for serving youtube link and LRC files to the front-end
    - Complete unit testing of API functions
+   - Implement LRC Scraper to obtain synchronized lyrics for database
+   - Create synched lyrics (e.g., extended LRC) database
 
 ### Issues in Progress
    - Implementation of database queries into our API
