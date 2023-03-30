@@ -1,4 +1,4 @@
-package spotify_api
+package youtube_api
 
 import (
 	"log"

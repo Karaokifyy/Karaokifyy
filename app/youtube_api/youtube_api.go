@@ -1,8 +1,6 @@
 package youtube_api
 
 import (
-	"flag"
-	"fmt"
 	"log"
 	"net/http"
 	"os"
@@ -28,28 +26,45 @@ func GetYoutubeURL(query string) (resultURL string, err error) {
         }
 
         // Make the API call to YouTube.
-        call := service.Search.List("id,snippet").
+		// var callHeaders []string 
+		// callHeaders[0] - "id"
+		// callHeaders[1] = "snippet"
+		callHeaders  :=  []string{"id,snippet"}
+        call := service.Search.List(callHeaders).
                 Q(query).
                 MaxResults(maxResults)
         response, err := call.Do()
 		
-		if(err != nil)
-		{
+		if(err != nil){
 			return resultURL, err
 		}
 
         // Group video, channel, and playlist results in separate lists.
         videos := make(map[string]string)
 
+		mostViewed := ""
+		highestCount := 0
         // Iterate through each item and add it to the correct list.
         for _, item := range response.Items {
                 switch item.Id.Kind {
                 case "youtube#video":
                         videos[item.Id.VideoId] = item.Snippet.Title
-                case "youtube#channel":
-                        channels[item.Id.ChannelId] = item.Snippet.Title
-                case "youtube#playlist":
-                        playlists[item.Id.PlaylistId] = item.Snippet.Title
+						callHeaders2  :=  []string{"statistics"}
+						videoCall := service.Videos.List(callHeaders2).Id(item.Id.VideoId)
+						videoResponse, err := videoCall.Do()
+
+						if err != nil {
+							log.Printf("Error getting stats: %v", err)
+							return resultURL, err
+						}
+
+						for _, field := range videoResponse.Items{
+							if field.Statistics.ViewCount > uint64(highestCount){
+								mostViewed = item.Id.VideoId
+							}
+						}
                 }
         }
+
+		return mostViewed, nil
 }
