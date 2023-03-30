@@ -23,6 +23,7 @@ It was also used to look for elements on the screen to validate that the output 
    - Cleaning up design of webpages
    - Implementing a search feature for a user to find a song without their spotify playlist
 
+---
 
 ## Back-end
 
