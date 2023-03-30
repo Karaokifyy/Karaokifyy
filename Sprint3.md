@@ -27,6 +27,9 @@ It was also used to look for elements on the screen to validate that the output 
 ## Back-end
 
 ### Issues Completed
+   - Create API functions and a router endpoint for serving songs from a user's playlist to the front-end
+   - Create API functions and router endpoint for serving youtube link and LRC files to the front-end
+   - Complete unit testing of API functions
 
 ### Issues in Progress
 
