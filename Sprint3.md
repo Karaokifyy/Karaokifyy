@@ -9,15 +9,27 @@
 ### Issues Completed
 
 -Display data on songs in a playlist the user selects
+
+
 -Display a youtube video with the kareoke version of the song the user selects through an IFrame
+
+
 -Created and Utilized an injectable service to send user data from component to component
+
+
 -Created unit and cypress tests for work we completed this sprint
+
+
 -Continued integration between recieving data from backend
 
 ### Issues in Progress
 
 -Recieving lyrics data from the database to display to user
+
+
 -Cleaning up design of webpages
+
+
 -Implementing a search feature for a user to find a song without their spotify playlist
 
 ---
