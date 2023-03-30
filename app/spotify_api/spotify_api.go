@@ -305,6 +305,7 @@ func GetUserPlaylists(user *SpotifyUserSession) (output map[string]Playlist, err
 
 // Getter for playlist using a playlist ID
 func GetPlaylist(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
 	vars := mux.Vars(r)
 	playlistID := vars["playlistID"]
 	trackList := GetByPlaylistID(playlistID)
