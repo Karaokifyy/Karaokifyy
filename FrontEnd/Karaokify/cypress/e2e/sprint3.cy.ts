@@ -13,8 +13,7 @@ describe('Test 2', () => {
         cy.visit('/')
         cy.get('[name="username"]').type('skandavskumaran@gmail.com');
         cy.get('[name="password"]').type('ayyampet');
-        cy.contains('Sign In').click();
-        cy.visit('/screen-search');
+        //cy.contains('Sign In').click();
         //cy.contains('LOG IN').click()
         // cy.url()
         //.should('includes','/screen-search')
