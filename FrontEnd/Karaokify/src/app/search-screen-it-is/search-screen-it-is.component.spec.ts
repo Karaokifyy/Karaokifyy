@@ -1,21 +1,21 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LyricsPageComponent } from './lyrics-page.component';
+import { SearchScreenItIsComponent } from './search-screen-it-is.component';
 import { UsersService } from '../services/user.service';
-import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { By } from '@angular/platform-browser';
+import { convertToParamMap, Router } from '@angular/router';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 
 
-describe('LyricsPageComponent', () => {
- let component: LyricsPageComponent;
- let fixture: ComponentFixture<LyricsPageComponent>;
+describe('SearchScreenItIsComponent', () => {
+ let component: SearchScreenItIsComponent;
+ let fixture: ComponentFixture<SearchScreenItIsComponent>;
 
 
  beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ LyricsPageComponent ],
-      imports: [ HttpClientModule ],
+      declarations: [ SearchScreenItIsComponent ],
+      imports: [ HttpClientTestingModule ],
       providers: [
         {
           provide: UsersService,
@@ -33,13 +33,13 @@ describe('LyricsPageComponent', () => {
         }
       ]
     });
-    fixture = TestBed.createComponent(LyricsPageComponent);
+    fixture = TestBed.createComponent(SearchScreenItIsComponent);
     component = fixture.componentInstance;
   });
 
 
  beforeEach(() => {
-   fixture = TestBed.createComponent(LyricsPageComponent);
+   fixture = TestBed.createComponent(SearchScreenItIsComponent);
    component = fixture.componentInstance;
    fixture.detectChanges();
  });
@@ -53,12 +53,15 @@ describe('LyricsPageComponent', () => {
    (expect as any)(component).toBeTruthy();
  });
 
- it('should have a YouTube link', () => {
-    const linkElement = fixture.nativeElement.querySelector('a[href*="youtube.com"]');
-    (expect as any)(linkElement).toBeFalsy();
+
+ it('should have a button', () => {
+    const buttonElement = fixture.nativeElement.querySelector('button');
+    (expect as any)(buttonElement).toBeTruthy();
   });
+
+
+
+
 });
-
-
 
 

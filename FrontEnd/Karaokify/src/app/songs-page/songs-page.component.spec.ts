@@ -52,16 +52,7 @@ describe('SongsPageComponent', () => {
  it('should create the component', () => {
    (expect as any)(component).toBeTruthy();
  });
-
-
- it('should have a button', () => {
-    const buttonElement = fixture.nativeElement.querySelector('button');
-    (expect as any)(buttonElement).toBeTruthy();
-  });
-
-
-
-
+ 
 });
 
 
