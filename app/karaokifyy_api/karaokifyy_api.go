@@ -9,30 +9,35 @@ import (
 	"github.com/gorilla/mux"
 )
 
+// Struct for song audio via youtube link and LRC file for song lyrics
 type AudioLyrics struct {
 	SongURL    string `json:"SongURL"`
 	SongLyrics string `json:"SongLyrics"`
 }
 
-func GetAudioLyrics(w http.ResponseWriter, r *http.Request) {
+// Gets audio link and song lyrics function for gorilla mux
+func GetAudioLyricsMux(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	songID := vars["songID"]
-	audio, lyrics := getAudioLyrics(songID)
+	audio, lyrics := GetAudioLyrics(songID)
 	audioLyrics := AudioLyrics{audio, lyrics}
 	json.NewEncoder(w).Encode(audioLyrics)
 }
 
-func getAudioLyrics(songID string) (string, string) {
+// Gets audio link and song lyrics from a Spotify song ID
+func GetAudioLyrics(songID string) (string, string) {
 	songName := getSongName(songID)
 	songURL := getYoutubeLink(songName)
 	songLyrics := getLRC(songID)
 	return songURL, songLyrics
 }
 
+// Gets a song's name from its song ID
 func getSongName(songID string) string {
 	return spotify_api.GetSongName(songID)
 }
 
+// Gets audio for a song via youtube using song name
 func getYoutubeLink(songName string) string {
 	if songName == "Landslide" {
 		return "https://www.youtube.com/watch?v=radHy4HhhNg&ab_channel=FleetwoodMac-Topic"
@@ -41,6 +46,7 @@ func getYoutubeLink(songName string) string {
 	}
 }
 
+// Gets LRC lyrics for a song using its unique Spotify song ID
 func getLRC(songID string) string {
 	if songID == "5ihS6UUlyQAfmp48eSkxuQ" {
 		return `[00:12.62]I took my love, I took it down
