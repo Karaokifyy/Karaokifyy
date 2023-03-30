@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SpotifyService } from '../services/spotify.service';
 import { ItunesService } from '../services/itunes.service';
+import { UsersService } from '../services/user.service';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import {
@@ -10,6 +11,7 @@ import { Injectable } from '@angular/core';
 import { NoopInterceptorService } from '../services/intercept.service';
 import { ActivatedRoute } from '@angular/router';
 import { param } from 'cypress/types/jquery';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-search-screen-it-is',
@@ -20,8 +22,8 @@ import { param } from 'cypress/types/jquery';
 export class SearchScreenItIsComponent implements OnInit{
 
   searchStr:String="";
-  songs:any;
-  constructor(private http: HttpClient, private route: ActivatedRoute){}
+  srch:string="";
+  constructor(private http: HttpClient, private route: ActivatedRoute, private us:UsersService,  private router: Router){}
 
   // ngOnInit(): void {}
     
@@ -44,10 +46,16 @@ export class SearchScreenItIsComponent implements OnInit{
       })
       console.log(JSON.stringify({o_code:params.get("code")}))
       console.log(params.get("code"))})
-      
+
   }
 
-  // httpData = [];
+  selectPlaylist(playlistID:string){
+    this.us.ChangeMessage(playlistID.substring(17));
+    this.router.navigateByUrl('/songs');
+    //const url = `http://localhost:8080/newSpotifySession`;
+    console.log(playlistID);
+
+  }
 
   httpResult = ($event: any) => {
     const url = `https://itunes.apple.com/search?term=${$event}&limit=500`;
@@ -57,5 +65,9 @@ export class SearchScreenItIsComponent implements OnInit{
       console.log(data.results);
     });
   };
+
+  UserLyricsPage(){
+    console.log("Welcome to lyrics page" );
+  }
 }
 

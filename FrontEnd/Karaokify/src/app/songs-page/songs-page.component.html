@@ -1,0 +1,17 @@
+
+<table class="table table-striped table-bordered mt-4">
+    <thead>
+        <th>Track Name</th>
+        <th>Artist</th>
+        <th></th>
+        <th></th>
+    </thead>
+    <tbody>
+        <tr *ngFor="let data of httpData; let i = index">
+            <td>{{data['SongName']}}</td> 
+            <td>{{data['ArtistName']}}</td> 
+            <td><img width="450" height="450" src={{data.AlbumImg}}></td>
+            <td><button mat-raised-button (click)="selectSongs(data['SongID'])">Select Song</button></td>
+        </tr>
+    </tbody>
+</table>
