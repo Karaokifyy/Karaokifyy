@@ -26,6 +26,9 @@ It was also used to look for elements on the screen to validate that the output 
 ---
 
 ## Back-end
+For the back-end, in Sprint 3 we implemented a GetPlaylistByID function in ```spotify_api.go``` that receives a playlist ID from the front-end and serves the songs from that playlist to the front-end using the ```/user/playlist/:playlistID``` endpoint. 
+
+We also implemented a new API functionality ```karaokifyy_api.go``` that includes our functions for serving a YouTube audio link and LRC lyric file of a specific song using its Spotify song ID to the front-end via the ```/karaokifyy/:songID``` endpoint. Unit tests were also implemented to test our API functionality that we completed in Sprint 3. 
 
 ### Issues Completed
    - Create API functions and a router endpoint for serving songs from a user's playlist to the front-end
@@ -34,7 +37,7 @@ It was also used to look for elements on the screen to validate that the output 
 
 ### Issues in Progress
    - Implementation of database queries into our API
-   - Access YouTube search using YouTube's API
+   - Access and utilize YouTube's search using YouTube's API
 
 ---
 
