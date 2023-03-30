@@ -14,22 +14,23 @@ import (
 
 type Track struct {
 	gorm.Model
-    id 				int 	`json:"id"`
-	name 			string 	`json:"name"`
-	artistName 		string 	`json:"artistName"`
-	albumName 		string 	`json:"albumName"`
-	duration 		int 	`json:"duration"`
-	instrumental 	bool 	`json:"instrumental"`
-	lang 			string 	`json:"lang"`
-	isrc 			string 	`json:"isrc"`
-	spotifyId 		string 	`json:"spotifyId"`
-	releaseDate 	string 	`json:"releaseDate"`
-	plainLyrics 	string	`json:"plainLyrics"`
-	syncedLyrics 	string 	`json:"syncedLyrics"`
+    ID 				int 	`json:"id"`
+	Name 			string 	`json:"name"`
+	ArtistName 		string 	`json:"artistName"`
+	AlbumName 		string 	`json:"albumName"`
+	Duration 		int 	`json:"duration"`
+	Instrumental 	bool 	`json:"instrumental"`
+	Lang 			string 	`json:"lang"`
+	ISRC 			string 	`json:"isrc"`
+	SpotifyId 		string 	`json:"spotifyId"`
+	ReleaseDate 	string 	`json:"releaseDate"`
+	PlainLyrics 	string	`json:"plainLyrics"`
+	SyncedLyrics 	string 	`json:"syncedLyrics"`
 }
 
 
 func scrape() {
+	fmt.Println("Scraping Lyrics")
 	db, err := gorm.Open(sqlite.Open("lyrics.db"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
@@ -38,7 +39,9 @@ func scrape() {
 	db.AutoMigrate(&Track{})
 
 	for i:=1; i <= 579899; i++{
+		fmt.Printf("Working on track #%d\n", i)
 		var newTrack Track
+
 
 		requestURL := fmt.Sprintf("https://lrclib.net/api/get/%d", i)
 		res, err := http.Get(requestURL)
@@ -51,11 +54,17 @@ func scrape() {
 				log.Printf("error decoding lrclib response: %d\n", i)
 			}
 
-			db.Create(newTrack)//add new track to database
+			db.Create(&newTrack)//add new track to database
 		}else{
 			log.Printf("error making http request for track ID: %d, statusCode: %d\n", i, res.StatusCode)
 		}
+
+		res.Body.Close()
 	}
 
+}
+
+func main(){
+	scrape()
 }
 
