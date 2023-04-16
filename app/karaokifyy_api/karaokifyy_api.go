@@ -30,15 +30,16 @@ func GetAudioLyricsMux(w http.ResponseWriter, r *http.Request) {
 
 func GetAudioLyrics(songID string) (string, string) {
 	songName := getSongName(songID)
-	// songURL := getYoutubeLink(songName)
-	songURL, err := youtube_api.GetYoutubeURL(songName)
+	songLyrics, songDuration := getLRC(songID)
+
+	songURL, err := youtube_api.GetYoutubeURL(songName, songDuration)
 	if err != nil{
-		log.Printf("Could not get yotubeURL")
+		log.Printf("Could not get youtubeURL")
 	}
-	songLyrics := getLRC(songID)
 	return songURL, songLyrics
 }
 
+//TODO: change to getYoutubeQuery; should return song name with artist name appended to it 
 func getSongName(songID string) string {
 	return spotify_api.GetSongName(songID)
 }
@@ -68,7 +69,7 @@ type Track struct {
 	SyncedLyrics 	string 	`json:"syncedLyrics"`
 }
 
-func getLRC(songID string) string {
+func getLRC(songID string) (string, int) {
 
 	db, err := gorm.Open(sqlite.Open("assets/lyrics_lite.db"), &gorm.Config{})
 	if err != nil {
@@ -80,42 +81,8 @@ func getLRC(songID string) string {
 	var track Track
 	// db.First(&track, "spotify_id = ?", songID)
 	if db.First(&track, "spotify_id = ?", songID).Error != nil{
-		if songID == "5ihS6UUlyQAfmp48eSkxuQ" {
-			return `[00:12.62]I took my love, I took it down
-	[00:18.40]Climbed a mountain and I turned around
-	[00:23.11]And I saw my reflection in the snow covered hills
-	[00:29.47]'Til the landslide brought it down
-
-	[00:35.98]Oh, mirror in the sky, What is love?
-	[00:41.85]Can the child within my heart rise above?
-	[00:48.01]Can I sail thru the changin' ocean tides?
-	[00:53.80]Can I handle the seasons of my life?
-
-	[01:11.77]Well, I've been afraid of changin'
-	[01:16.71]'Cause I've built my life around you
-	[01:23.39]But time makes you bolder
-	[01:26.65]Even children get older
-	[01:30.02]And I'm getting older too
-	[02:00.42]Well, I've been afraid of changin'
-	[02:05.67]'Cause I've built my life around you
-	[02:12.48]But time makes you bolder
-	[02:15.52]Even children get older
-	[02:18.70]And I'm getting older too
-	[02:24.88]And I'm getting older too
-
-	[02:31.02]Ahh, take my love, take it down
-	[02:38.34]Ahh, Climb a mountain and turn around
-	[02:43.03]And if you see my reflection in the snow covered hills
-	[02:49.30]Well the landslide will bring it down
-	[02:54.85]And if you see my reflection in the snow covered hills
-	[03:02.73]Well the landslide will bring it down
-
-	[03:09.14]Oh, The landslide will bring it down`
-		} else {
-			return "nil"
-		}
+		return "",0
 	}
 
-	return track.SyncedLyrics
-
+	return track.SyncedLyrics, track.Duration
 }
