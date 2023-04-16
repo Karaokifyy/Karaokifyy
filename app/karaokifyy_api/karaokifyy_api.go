@@ -12,7 +12,6 @@ import (
 
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-
 )
 
 type AudioLyrics struct {
@@ -21,6 +20,7 @@ type AudioLyrics struct {
 }
 
 func GetAudioLyricsMux(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
 	vars := mux.Vars(r)
 	songID := vars["songID"]
 	audio, lyrics := GetAudioLyrics(songID)
@@ -32,7 +32,7 @@ func GetAudioLyrics(songID string) (string, string) {
 	songName := getSongName(songID)
 	// songURL := getYoutubeLink(songName)
 	songURL, err := youtube_api.GetYoutubeURL(songName)
-	if err != nil{
+	if err != nil {
 		log.Printf("Could not get yotubeURL")
 	}
 	songLyrics := getLRC(songID)
@@ -51,21 +51,20 @@ func getYoutubeLink(songName string) string {
 	}
 }
 
-
 type Track struct {
 	gorm.Model
-    ID 				int 	`json:"id"`
-	Name 			string 	`json:"name"`
-	ArtistName 		string 	`json:"artistName"`
-	AlbumName 		string 	`json:"albumName"`
-	Duration 		int 	`json:"duration"`
-	Instrumental 	bool 	`json:"instrumental"`
-	Lang 			string 	`json:"lang"`
-	ISRC 			string 	`json:"isrc"`
-	SpotifyId 		string 	`json:"spotifyId"`
-	ReleaseDate 	string 	`json:"releaseDate"`
-	PlainLyrics 	string	`json:"plainLyrics"`
-	SyncedLyrics 	string 	`json:"syncedLyrics"`
+	ID           int    `json:"id"`
+	Name         string `json:"name"`
+	ArtistName   string `json:"artistName"`
+	AlbumName    string `json:"albumName"`
+	Duration     int    `json:"duration"`
+	Instrumental bool   `json:"instrumental"`
+	Lang         string `json:"lang"`
+	ISRC         string `json:"isrc"`
+	SpotifyId    string `json:"spotifyId"`
+	ReleaseDate  string `json:"releaseDate"`
+	PlainLyrics  string `json:"plainLyrics"`
+	SyncedLyrics string `json:"syncedLyrics"`
 }
 
 func getLRC(songID string) string {
@@ -73,13 +72,13 @@ func getLRC(songID string) string {
 	db, err := gorm.Open(sqlite.Open("assets/lyrics_lite.db"), &gorm.Config{})
 	if err != nil {
 		panic("failed to connect database")
-		}
+	}
 
 	db.AutoMigrate(&Track{})
 
 	var track Track
 	// db.First(&track, "spotify_id = ?", songID)
-	if db.First(&track, "spotify_id = ?", songID).Error != nil{
+	if db.First(&track, "spotify_id = ?", songID).Error != nil {
 		if songID == "5ihS6UUlyQAfmp48eSkxuQ" {
 			return `[00:12.62]I took my love, I took it down
 	[00:18.40]Climbed a mountain and I turned around
