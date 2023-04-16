@@ -30,15 +30,23 @@ func GetAudioLyricsMux(w http.ResponseWriter, r *http.Request) {
 
 func GetAudioLyrics(songID string) (string, string) {
 	songName := getSongName(songID)
+<<<<<<< HEAD
 	// songURL := getYoutubeLink(songName)
 	songURL, err := youtube_api.GetYoutubeURL(songName)
 	if err != nil {
 		log.Printf("Could not get yotubeURL")
+=======
+	songLyrics, songDuration := getLRC(songID)
+
+	songURL, err := youtube_api.GetYoutubeURL(songName, songDuration)
+	if err != nil{
+		log.Printf("Could not get youtubeURL")
+>>>>>>> main
 	}
-	songLyrics := getLRC(songID)
 	return songURL, songLyrics
 }
 
+//TODO: change to getYoutubeQuery; should return song name with artist name appended to it 
 func getSongName(songID string) string {
 	return spotify_api.GetSongName(songID)
 }
@@ -67,7 +75,7 @@ type Track struct {
 	SyncedLyrics string `json:"syncedLyrics"`
 }
 
-func getLRC(songID string) string {
+func getLRC(songID string) (string, int) {
 
 	db, err := gorm.Open(sqlite.Open("assets/lyrics_lite.db"), &gorm.Config{})
 	if err != nil {
@@ -78,6 +86,7 @@ func getLRC(songID string) string {
 
 	var track Track
 	// db.First(&track, "spotify_id = ?", songID)
+<<<<<<< HEAD
 	if db.First(&track, "spotify_id = ?", songID).Error != nil {
 		if songID == "5ihS6UUlyQAfmp48eSkxuQ" {
 			return `[00:12.62]I took my love, I took it down
@@ -113,8 +122,11 @@ func getLRC(songID string) string {
 		} else {
 			return "nil"
 		}
+=======
+	if db.First(&track, "spotify_id = ?", songID).Error != nil{
+		return "",0
+>>>>>>> main
 	}
 
-	return track.SyncedLyrics
-
+	return track.SyncedLyrics, track.Duration
 }

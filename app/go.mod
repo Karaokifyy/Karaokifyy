@@ -29,6 +29,7 @@ require (
 require (
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/joho/godotenv v1.5.1
+	github.com/spatialtime/iso8601-go v0.0.0-20200510230922-dfc436a28fab
 	golang.org/x/net v0.8.0 // indirect
 	golang.org/x/oauth2 v0.6.0
 	google.golang.org/appengine v1.6.7 // indirect
