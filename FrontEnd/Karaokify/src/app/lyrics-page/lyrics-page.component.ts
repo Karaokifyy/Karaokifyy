@@ -37,6 +37,8 @@ export class LyricsPageComponent implements OnInit {
       (message) => (this.str1 = message)
     );
     console.log(this.str1)
+    //this.url="http://localhost:8080/karaokifyy/"+this.str1;
+    console.log(this.url)
   
    
     //this.str2=this.str2+this.str1;
@@ -54,7 +56,14 @@ export class LyricsPageComponent implements OnInit {
         //console.log(mapResult)
         for (let i = 0; i < mapResult.length; i++) {
           this.httpData.push(mapResult[i][1])
-          //console.log(mapResult[i][1])
+          // console.log(i)
+          // console.log(mapResult[i][1])
+          if(i==0){
+            const myArr1:any=mapResult[i][1]
+            console.log(myArr1)
+            this.strnewlyrics=myArr1
+            console.log(this.strnewlyrics)
+          }
           if(i!=0){
             const myArr:any=mapResult[i][1]
             this.strnewlyrics=myArr
@@ -127,6 +136,10 @@ export class LyricsPageComponent implements OnInit {
 
   }
   displaylyrics(){
+    if(this.counter+1==this.timeArray.length){
+      clearInterval(this.interval);
+      return;
+    }
     let nummy2 = 0;
     let nummy1 = 0;
     let nummy = "";
@@ -140,7 +153,7 @@ export class LyricsPageComponent implements OnInit {
     this.counter++;
     this.timeInterval=nummy2
 
-    //console.log(this.timeInterval)
+    console.log(this.timeInterval)
     clearInterval(this.interval);
     this.interval = setInterval(() => {
       this.displaylyrics();
