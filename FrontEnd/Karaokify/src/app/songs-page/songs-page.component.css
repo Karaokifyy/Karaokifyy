@@ -1,11 +1,46 @@
-button {
-    padding: 10px 20px;
-    font-size: 16px;
-    background-color: #1DB954;
-    color: white;
-    border: none;
-    border-radius: 30px;
-    cursor: pointer;
-    font-family: 'Montserrat', sans-serif;
-    transition: background-color 0.2s ease;
-  }
+/* button {
+   padding: 10px 20px;
+   font-size: 16px;
+   background-color: #1DB954;
+   color: white;
+   border: none;
+   border-radius: 30px;
+   cursor: pointer;
+   font-family: 'Montserrat', sans-serif;
+   transition: background-color 0.2s ease;
+ } */
+
+
+ table {
+  border-collapse: collapse;
+  width: 100%;
+}
+ th {
+  background-color: #1DB954;
+  color: white;
+  font-family: 'Open Sans', sans-serif;
+  font-size: 18px;
+  padding: 12px;
+  text-align: left;
+}
+ tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+ td {
+  font-family: 'Roboto', sans-serif;
+  font-size: 16px;
+  padding: 8px;
+  text-align: left;
+}
+ button {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #1DB954;
+  color: white;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  transition: background-color 0.2s ease;
+}
+
