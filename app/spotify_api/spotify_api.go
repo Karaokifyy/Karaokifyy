@@ -14,7 +14,7 @@ import (
 	"golang.org/x/oauth2/clientcredentials"
 )
 
-// A Song object (for front-end) with filtered JSON
+// Song object (for front-end) with filtered JSON
 type Song struct {
 	SongID     string  `json:"SongID"`
 	SongName   string  `json:"SongName"`
@@ -23,13 +23,13 @@ type Song struct {
 	AlbumImg   string  `json:"AlbumImg"`
 }
 
-// An Artist object (for front-end) with filtered JSON
+// Artist object (for front-end) with filtered JSON
 type Artist struct {
 	ArtistID   string `json:"ArtistID"`
 	ArtistName string `json:"ArtistName"`
 }
 
-// An Album object (for front-end) with filtered JSON
+// Album object (for front-end) with filtered JSON
 type Album struct {
 	AlbumID    string `json:"AlbumID"`
 	AlbumName  string `json:"AlbumName"`
@@ -84,7 +84,7 @@ func GetSongName(songID string) string {
 
 // Takes string and performs a Spotify song search
 // Returns a slice of Song structs
-func SearchBySong(songName string) []Song {
+func SearchSongInterface(songName string) []Song {
 	client := getSpotifyClient()
 
 	// Search for a song/track containing "songName"
@@ -109,7 +109,7 @@ func SearchBySong(songName string) []Song {
 	return songList
 }
 
-func SearchByAlbum(albumName string) []Album {
+func SearchAlbumInterface(albumName string) []Album {
 	client := getSpotifyClient()
 
 	// Search for an album containing "albumName"
@@ -133,7 +133,7 @@ func SearchByAlbum(albumName string) []Album {
 	return albumList
 }
 
-func SearchByArtist(artistName string) []Artist {
+func SearchArtistInterface(artistName string) []Artist {
 	client := getSpotifyClient()
 
 	// Search for an artist containing "artistName"
@@ -155,7 +155,7 @@ func SearchByArtist(artistName string) []Artist {
 	return artistList
 }
 
-func SearchByPlaylist(playlistName string) []Playlist2 {
+func SearchPlaylistInterface(playlistName string) []Playlist2 {
 	client := getSpotifyClient()
 
 	// Search for an artist containing "artistName"
@@ -203,11 +203,11 @@ func GetByPlaylistID(playlistID string) []Song {
 	return songList
 }
 
-func SearchSong(w http.ResponseWriter, r *http.Request) {
+func SearchSongRouter(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	songName := vars["songName"]
 
-	songList := SearchBySong(songName)
+	songList := SearchSongInterface(songName)
 
 	// Loop over the list of tracks, looking for a track
 	// name that matches the parameter given.
@@ -216,7 +216,7 @@ func SearchSong(w http.ResponseWriter, r *http.Request) {
 	// song.IndentedJSON(http.StatusNotFound, gin.H{"Message": "Song not found"})
 }
 
-func SearchAlbum(w http.ResponseWriter, r *http.Request) {
+func SearchAlbumRouter(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	albumName := vars["albumName"]
 	albumList := SearchByAlbum(albumName)
@@ -224,7 +224,7 @@ func SearchAlbum(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(albumList)
 }
 
-func SearchArtist(w http.ResponseWriter, r *http.Request) {
+func SearchArtistRouter(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	artistName := vars["artistName"]
 	artistList := SearchByArtist(artistName)
@@ -232,7 +232,7 @@ func SearchArtist(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(artistList)
 }
 
-func SearchPlaylist(w http.ResponseWriter, r *http.Request) {
+func SearchPlaylistRouter(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	playlistName := vars["playlistName"]
 	playlistList := SearchByPlaylist(playlistName)
