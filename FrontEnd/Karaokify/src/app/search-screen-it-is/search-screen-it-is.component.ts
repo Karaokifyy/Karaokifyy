@@ -35,12 +35,12 @@ export class SearchScreenItIsComponent implements OnInit{
     .subscribe(params => {
       this.http.post(url, JSON.stringify({o_code:params.get("code")})).subscribe(data =>{
         const serverResult = JSON.parse(JSON.stringify(data))
-        console.log(serverResult)
+        //console.log(serverResult)
         const mapResult = Object.entries(serverResult)
-        console.log(mapResult)
+        //console.log(mapResult)
         for (let i = 0; i < mapResult.length; i++) {
           this.httpData.push(mapResult[i][1])
-          console.log(mapResult[i][1])
+          //console.log(mapResult[i][1])
         } 
         
       })
@@ -70,4 +70,3 @@ export class SearchScreenItIsComponent implements OnInit{
     console.log("Welcome to lyrics page" );
   }
 }
-
