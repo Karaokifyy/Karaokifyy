@@ -37,7 +37,7 @@ The code displays lyrics for a YouTube video in sync with the video playback. Th
    - [What is Karaokiffy?](#what-is-karaokiffy)
 
 [How to use the API](#how-to-use-the-api)
-   - [Get audio link and lyric file for a song](#get-audio-link-and-lyric-file-for-a-song)
+   - [Get YouTube link and lyric file for a song](#get-audio-link-and-lyric-file-for-a-song)
    - [Get tracks from a playlist](#get-tracks-from-a-playlist)
    - [Search for a song](#search-for-a-song)
    - [Search for an album](#search-for-an-album)
