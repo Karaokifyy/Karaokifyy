@@ -26,6 +26,7 @@ body {
     padding: 20px;
     background-color: black;
     color: white;
+    border-radius: 10px;
 }
 .lyrics-container p {
     font-weight: bold; 
