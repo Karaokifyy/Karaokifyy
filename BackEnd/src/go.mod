@@ -1,4 +1,4 @@
-module github.com/Karaokifyy/Karaokifyy/app
+module github.com/Karaokifyy/Karaokifyy/BackEnd/src
 
 go 1.19
 
