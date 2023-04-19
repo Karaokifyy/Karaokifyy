@@ -10,8 +10,8 @@ Run FrontEnd Locally
 2. Install angular CLI by using "npm install -g @angular/cli" in cmd prompt
 3. Download/Clone our project from our [GitHub](https://github.com/Karaokifyy/Karaokifyy)
 4. change directory in cmd prompt to ...\Karaokifyy\FrontEnd\Karaokify
-5. Run npm install in cmd prompt
-6. Run ng serve
+5. Run "npm install" in cmd prompt
+6. Run "ng serve" in cmd prompt
 7. The application will be running on [localhost:4200](http://localhost:4200)
 
 ## Members
