@@ -151,7 +151,7 @@ export class LyricsPageComponent implements OnInit {
     nummy2 = (nummy2-nummy1)*1000
     this.displayText = this.textArray[this.counter]
     this.counter++;
-    this.timeInterval=nummy2
+    this.timeInterval=(nummy2-50)
 
     console.log(this.timeInterval)
     clearInterval(this.interval);

@@ -1,6 +1,9 @@
 {
   "extends": "../tsconfig.json",
   "include": ["**/*.ts"],
+  "viewportHeight":1000,
+  "viewportWidth":1280,
+  "experimentalSessionAndOrigin":true,
   "compilerOptions": {
     "sourceMap": false,
     "types": ["cypress"]

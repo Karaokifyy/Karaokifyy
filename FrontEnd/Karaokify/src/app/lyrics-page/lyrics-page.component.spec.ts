@@ -57,7 +57,15 @@ describe('LyricsPageComponent', () => {
    (expect as any)(component).toBeTruthy();
  });
 
+
+
  it('should have a YouTube link', () => {
+    const linkElement = fixture.nativeElement.querySelector('a[href*="youtube.com"]');
+    (expect as any)(linkElement).toBeFalsy();
+  });
+
+
+  it('Youtube link should be the correct one from database', () => {
     const linkElement = fixture.nativeElement.querySelector('a[href*="youtube.com"]');
     (expect as any)(linkElement).toBeFalsy();
   });
