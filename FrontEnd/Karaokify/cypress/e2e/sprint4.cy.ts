@@ -9,7 +9,7 @@ describe('Test 1', () => {
 
 
 describe('Test 2', () => {
-    it('OAuth Login with 3rd party', () => {
+    it('OAuth Login and Authentication with 3rd party', () => {
         cy.visit('')
         cy.get('button').contains('Sign In').click();
 
