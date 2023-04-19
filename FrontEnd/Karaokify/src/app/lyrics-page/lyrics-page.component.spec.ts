@@ -1,11 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LyricsPageComponent } from './lyrics-page.component';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';import { LyricsPageComponent } from './lyrics-page.component';
 import { UsersService } from '../services/user.service';
 import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
 import { HttpTestingController } from '@angular/common/http/testing';
+
 
 
 
@@ -67,6 +67,22 @@ describe('LyricsPageComponent', () => {
     component.testtest();
     (expect as any)(console.log).toHaveBeenCalledWith('clicked');
   });
+  
+  it('should update displayed lyrics in displaylyrics()', () => {
+    component.timeArray = ['000', '101', '102'];
+    component.textArray = ['line 1', 'line 2', 'line 3'];
+  
+    component.displaylyrics();
+    (expect as any)(component.displayText).toEqual('line 1');
+    (expect as any)(component.counter).toEqual(1);
+    (expect as any)(component.timeInterval).toEqual(61000);
+  
+    component.displaylyrics();
+    (expect as any)(component.displayText).toEqual('line 2');
+    (expect as any)(component.counter).toEqual(2);
+    (expect as any)(component.timeInterval).toEqual(1000);
+  });
+  
 });
 
 
