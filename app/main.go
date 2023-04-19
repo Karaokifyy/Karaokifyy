@@ -18,8 +18,9 @@ import (
 )
 
 func main() {
+	// load environment variables for client authentication
 	getEnvVars()
-	//gorilla-mux router
+	// gorilla-mux router
 	r := mux.NewRouter()
 
 	//code to display front-end resources and files when requested

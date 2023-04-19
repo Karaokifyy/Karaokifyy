@@ -14,7 +14,7 @@ import (
 	"golang.org/x/oauth2/clientcredentials"
 )
 
-// Song object (for front-end) with filtered JSON
+// Song object 
 type Song struct {
 	SongID     string  `json:"SongID"`
 	SongName   string  `json:"SongName"`
@@ -23,13 +23,13 @@ type Song struct {
 	AlbumImg   string  `json:"AlbumImg"`
 }
 
-// Artist object (for front-end) with filtered JSON
+// Artist object 
 type Artist struct {
 	ArtistID   string `json:"ArtistID"`
 	ArtistName string `json:"ArtistName"`
 }
 
-// Album object (for front-end) with filtered JSON
+// Album object
 type Album struct {
 	AlbumID    string `json:"AlbumID"`
 	AlbumName  string `json:"AlbumName"`
@@ -37,7 +37,7 @@ type Album struct {
 	AlbumImg   string `json:"AlbumImg"`
 }
 
-// A Playlist object (for front-end) with filtered JSON
+// Playlist object
 type Playlist2 struct {
 	PlaylistID   string `json:"PlaylistID"`
 	PlaylistName string `json:"PlaylistName"`
@@ -209,9 +209,6 @@ func SearchSongRouter(w http.ResponseWriter, r *http.Request) {
 
 	songList := SearchSongInterface(songName)
 
-	// Loop over the list of tracks, looking for a track
-	// name that matches the parameter given.
-
 	json.NewEncoder(w).Encode(songList)
 	// song.IndentedJSON(http.StatusNotFound, gin.H{"Message": "Song not found"})
 }
@@ -219,7 +216,7 @@ func SearchSongRouter(w http.ResponseWriter, r *http.Request) {
 func SearchAlbumRouter(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	albumName := vars["albumName"]
-	albumList := SearchByAlbum(albumName)
+	albumList := SearchAlbumInterface(albumName)
 
 	json.NewEncoder(w).Encode(albumList)
 }
@@ -227,7 +224,7 @@ func SearchAlbumRouter(w http.ResponseWriter, r *http.Request) {
 func SearchArtistRouter(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	artistName := vars["artistName"]
-	artistList := SearchByArtist(artistName)
+	artistList := SearchArtistInterface(artistName)
 
 	json.NewEncoder(w).Encode(artistList)
 }
@@ -235,7 +232,7 @@ func SearchArtistRouter(w http.ResponseWriter, r *http.Request) {
 func SearchPlaylistRouter(w http.ResponseWriter, r *http.Request) {
 	vars := mux.Vars(r)
 	playlistName := vars["playlistName"]
-	playlistList := SearchByPlaylist(playlistName)
+	playlistList := SearchPlaylistInterface(playlistName)
 
 	json.NewEncoder(w).Encode(playlistList)
 }

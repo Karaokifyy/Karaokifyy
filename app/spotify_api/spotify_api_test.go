@@ -15,9 +15,9 @@ func getEnvVars() {
 	}
 }
 
-func TestSearchBySong(t *testing.T) {
+func TestSearchSongInterface(t *testing.T) {
 	getEnvVars()
-	result := SearchBySong("Bohemian%20Rhapsody")[0]
+	result := SearchSongInterface("Bohemian%20Rhapsody")[0]
 	expected := Song{
 		"7tFiyTwD0nx5a1eklYtX2J",
 		"Bohemian Rhapsody - Remastered 2011",
@@ -34,9 +34,9 @@ func TestSearchBySong(t *testing.T) {
 	}
 }
 
-func TestSearchByAlbum(t *testing.T) {
+func TestSearchAlbumInterface(t *testing.T) {
 	getEnvVars()
-	result := SearchByAlbum("Party")[0]
+	result := SearchAlbumInterface("Party")[0]
 	expected := Album{
 		"1xwhNJCfTwuRia7Cpo7IbJ",
 		"PARTYNEXTDOOR TWO",
@@ -51,9 +51,9 @@ func TestSearchByAlbum(t *testing.T) {
 	}
 }
 
-func TestSearchByArtist(t *testing.T) {
+func TestSearchArtistInterface(t *testing.T) {
 	getEnvVars()
-	result := SearchByArtist("Queen")[0]
+	result := SearchArtistInterface("Queen")[0]
 	expected := Artist{"1dfeR4HaWDbWqFHLkxsg1d", "Queen"}
 
 	if (result.ArtistID != expected.ArtistID) ||
@@ -62,9 +62,9 @@ func TestSearchByArtist(t *testing.T) {
 	}
 }
 
-func TestSearchByPlaylist(t *testing.T) {
+func TestSearchPlaylistInterface(t *testing.T) {
 	getEnvVars()
-	result := SearchByPlaylist("Queen")[0]
+	result := SearchPlaylistInterface("Queen")[0]
 	expected := Playlist2{"37i9dQZF1DWSIO2QWRavWZ", "Queen"}
 
 	if (result.PlaylistID != expected.PlaylistID) ||
