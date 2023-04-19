@@ -5,11 +5,15 @@ import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
+import { HttpTestingController } from '@angular/common/http/testing';
+
 
 
 describe('LyricsPageComponent', () => {
  let component: LyricsPageComponent;
  let fixture: ComponentFixture<LyricsPageComponent>;
+ let httpMock: HttpTestingController;
+
 
 
  beforeEach(() => {
@@ -56,6 +60,12 @@ describe('LyricsPageComponent', () => {
  it('should have a YouTube link', () => {
     const linkElement = fixture.nativeElement.querySelector('a[href*="youtube.com"]');
     (expect as any)(linkElement).toBeFalsy();
+  });
+  
+  it('should log a message to console when testtest() is called', () => {
+    spyOn(console, 'log');
+    component.testtest();
+    (expect as any)(console.log).toHaveBeenCalledWith('clicked');
   });
 });
 
