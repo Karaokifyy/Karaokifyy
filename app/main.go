@@ -54,12 +54,10 @@ func newSpotifySession(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
 	//retrieving initial json paramaters and setting redirect0rui
 	var newUser spotify_api.SpotifyUserSession
-
 	if err := json.NewDecoder(r.Body).Decode(&newUser); err != nil {
 		return
 	}
 	newUser.Redirect_uri = "http://localhost:4200/screen-search"
-
 	//requesting access_token
 	log.Printf("requesting access_token\n")
 	if err := spotify_api.RequestAccessToken(&newUser); err != nil {

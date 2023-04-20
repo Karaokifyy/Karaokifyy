@@ -1,15 +1,19 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { LyricsPageComponent } from './lyrics-page.component';
+import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';import { LyricsPageComponent } from './lyrics-page.component';
 import { UsersService } from '../services/user.service';
 import { ActivatedRoute, convertToParamMap, Router } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { By } from '@angular/platform-browser';
 import { of } from 'rxjs';
+import { HttpTestingController } from '@angular/common/http/testing';
+
+
 
 
 describe('LyricsPageComponent', () => {
  let component: LyricsPageComponent;
  let fixture: ComponentFixture<LyricsPageComponent>;
+ let httpMock: HttpTestingController;
+
 
 
  beforeEach(() => {
@@ -57,6 +61,39 @@ describe('LyricsPageComponent', () => {
     const linkElement = fixture.nativeElement.querySelector('a[href*="youtube.com"]');
     (expect as any)(linkElement).toBeFalsy();
   });
+  
+  it('should log a message to console when testtest() is called', () => {
+    spyOn(console, 'log');
+    component.testtest();
+    (expect as any)(console.log).toHaveBeenCalledWith('clicked');
+  });
+  
+  // it('should initialize the component and make HTTP calls', () => {
+  //   component.ngOnInit();
+  //   const req = httpMock.expectOne(component.url);
+  //   (expect as any)(req.request.method).toBe('GET');
+  //   req.flush({});
+  
+  //   fixture.detectChanges();
+  //   (expect as any)(component.str1).toEqual('mock value');
+  //   (expect as any)(component.url).toContain('mock value');
+  // });
+  
+  it('should update displayed lyrics in displaylyrics()', () => {
+    component.timeArray = ['000', '101', '102'];
+    component.textArray = ['line 1', 'line 2', 'line 3'];
+  
+    component.displaylyrics();
+    (expect as any)(component.displayText).toEqual('line 1');
+    (expect as any)(component.counter).toEqual(1);
+    (expect as any)(component.timeInterval).toEqual(60950);
+  
+    component.displaylyrics();
+    (expect as any)(component.displayText).toEqual('line 2');
+    (expect as any)(component.counter).toEqual(2);
+    (expect as any)(component.timeInterval).toEqual(950);
+  });
+  
 });
 
 
