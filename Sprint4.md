@@ -22,8 +22,19 @@ The code displays lyrics for a YouTube video in sync with the video playback. Th
 
 ## Back-end
 
+__Project Refactoring__
+
+In Sprint 4, we refactored the backend to follow the MVC (model-view-controller) architecture. This allows our application to be scalable, maintainable, modular, and helps prevent conflicts with merges.
+
+Below is a diagram illustrating the flow behind the refactoring process in Sprint 4:
+
+![alt text](https://i.ibb.co/yqtt6Kx/Karaokifyy-MVC-Model.png)
+
+In addition to implementing the MVC pattern, we also restructured functions and removed redundant code and comments.
 
 ### Issues Completed
+   - Refactoring back-end
+   - Complete documentation for back-end
 
 ---
 
