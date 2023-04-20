@@ -1,12 +1,12 @@
 package main
 
 import (
-	"github.com/Karaokifyy/Karaokifyy/BackEnd/src/api/routes/router"
+	env_vars "github.com/Karaokifyy/BackEnd/src/helpers/env_vars"
+	router "github.com/Karaokifyy/BackEnd/src/routes"
 )
 
+// primary entry point for back-end
 func main() {
-	// TODO: Router runs configs
+	env_vars.GetEnvVars()
 	router.Run()
 }
-
-
