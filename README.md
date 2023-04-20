@@ -15,10 +15,10 @@ Run FrontEnd Locally
 7. The application will be running on [localhost:4200](http://localhost:4200)
 
 Set up Back-end Locally
-1. Run app.exe while in "Karaokiffy/app" folder
+1. Run src.exe while in "BackEnd/src" folder
 OR
 1. Ensure CGO is [enabled](https://pkg.go.dev/cmd/cgo) and you have a [working x64 c compiler (e.g.](https://www.msys2.org/)) accesible and in "PATH"
-2. open the "app" directory in a terminal and perform either
+2. open the "BackEnd/src" directory in a terminal and perform either
    1. "go build" and run the generated executable file OR
    2. "go run ."
 
