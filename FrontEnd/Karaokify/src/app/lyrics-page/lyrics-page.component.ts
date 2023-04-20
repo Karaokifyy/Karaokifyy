@@ -35,9 +35,9 @@ export class LyricsPageComponent implements OnInit {
     var num = this.us.currentMessage.subscribe(
       (message) => (this.str1 = message)
     );
-    console.log(this.str1)
+    //console.log(this.str1)
     this.url=this.url+this.str1;
-    console.log(this.url)
+    //console.log(this.url)
   
    
 
@@ -61,7 +61,7 @@ export class LyricsPageComponent implements OnInit {
             const myArr1:any=mapResult[i][1]
             //console.log(myArr1)
             this.strnewlyrics=myArr1
-            console.log(this.strnewlyrics)
+            //console.log(this.strnewlyrics)
             this.str2=this.strnewlyrics
           }
           if(i!=0){
@@ -153,7 +153,7 @@ export class LyricsPageComponent implements OnInit {
     this.counter++;
     this.timeInterval=(nummy2-50)
 
-    console.log(this.timeInterval)
+    //console.log(this.timeInterval)
     clearInterval(this.interval);
     this.interval = setInterval(() => {
       this.displaylyrics();

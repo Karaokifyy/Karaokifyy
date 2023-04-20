@@ -49,6 +49,7 @@ func SearchPlaylistController(w http.ResponseWriter, r *http.Request) {
 
 // Handle playlist id search http request, send data to service, pass result to generate model, send to view encoder.
 func GetPlaylistController(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "http://localhost:4200")
 	playlistName := mux.Vars(r)["playlistID"]
 	searchResult := spotify_service.GetPlaylistService(playlistName)
 	playlistList := model.UserPlaylistModel(searchResult)

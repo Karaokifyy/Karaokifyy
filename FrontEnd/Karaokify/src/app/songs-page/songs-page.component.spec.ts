@@ -54,7 +54,8 @@ describe('SongsPageComponent', () => {
  });
 
  it('should be able to click the song by button', () => {
-  (expect as any)(HTMLButtonElement).toBeTruthy();
+  const buttonElement = fixture.nativeElement.querySelector('button');
+  (expect as any)(buttonElement).toBeTruthy();
 });
  
 });
